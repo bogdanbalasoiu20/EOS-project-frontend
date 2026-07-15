@@ -1,0 +1,50 @@
+/* --- DESIGN MODALĂ --- */
+.modal {
+  background-color: rgba(15, 23, 42, 0.4); 
+  backdrop-filter: blur(4px); 
+  transition: var(--transition);
+}
+
+.modal-dialog {
+  margin-top: 10%;
+}
+
+.modal-content {
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  background-color: var(--card-bg);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.25rem 1.5rem;
+}
+
+.modal-title {
+  font-weight: 600;
+  color: var(--text-main);
+  font-size: 1.15rem;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+  background-color: #f8fafc; 
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+}
+
+.btn-close {
+  background-size: 0.8rem;
+  opacity: 0.5;
+  transition: var(--transition);
+}
+.btn-close:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+}

@@ -1,0 +1,61 @@
+<div class="mb-3">
+  <button
+    class="btn btn-primary"
+    (click)="openNewTaskModal()">
+    New Task
+  </button>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Due Date</th>
+      <th>Subject</th>
+      <th>Status</th>
+      <th>Created By</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (task of tasks; track task.taskId) {
+      <tr>
+        <td>{{ task.dueDate | date:'dd.MM.yyyy HH:mm' }}</td>
+        <td>{{ task.taskName }}</td>
+        <td>
+          <span class="status-badge" 
+                [ngClass]="{
+                  'status-completed': task.statusName === 'Completed',
+                  'status-in-progress': task.statusName === 'In Progress',
+                  'status-pending': task.statusName === 'Pending',
+                  'status-cancelled': task.statusName === 'Cancelled'
+                }">
+            {{ task.statusName }}
+          </span>
+        </td>
+        <td>{{ task.createdBy }}</td>
+        <td>
+          <button
+              class="btn btn-warning btn-sm me-2"
+              (click)="editTask(task)">
+              Edit
+          </button>
+
+          <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteTask(task.taskId)">
+              Delete
+          </button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+@if (showModal) {
+  <app-task-modal
+      [task]="selectedTask"
+      (saved)="onTaskSaved()"
+      (close)="closeModal()">
+  </app-task-modal>
+}

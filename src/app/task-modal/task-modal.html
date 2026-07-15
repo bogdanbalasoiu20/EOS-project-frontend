@@ -1,0 +1,78 @@
+<div class="modal d-block" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ task.taskId ? 'Edit Task' : 'New Task' }}
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          (click)="close.emit()">
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="mb-3">
+          <label class="form-label">Task Name</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="task.taskName">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Due Date</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            [(ngModel)]="task.dueDate">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Status</label>
+
+          <select
+            class="form-select"
+            [(ngModel)]="task.statusTypeId">
+
+            @for (status of statuses; track status.statusTypeId) {
+                <option [value]="status.statusTypeId">
+                {{ status.statusName }}
+                </option>
+            }
+
+           </select>
+
+           <!-- <p>{{ statuses.length }}</p>
+           @for (status of statuses; track status.statusTypeId) {
+                <p>{{ status.statusName }}</p>
+           } -->
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="close.emit()">
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="saveTask()">
+          Save
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+</div>

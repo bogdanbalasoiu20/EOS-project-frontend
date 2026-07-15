@@ -1,0 +1,87 @@
+/* --- TABELUL DE TASKS (Design Rafinat) --- */
+.table {
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden; 
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border-color);
+  /* O umbră mai difuză și mai moale pentru un aspect de "plutire" */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); 
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+/* Antet mai curat, cu text ușor mai mic și spațiat */
+.table thead th {
+  background-color: #1e293b; /* Albastru închis spre gri (Slate 800) */
+  color: #f1f5f9;            /* Text alb-gri deschis pentru contrast perfect */
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.725rem;
+  letter-spacing: 0.08em;
+  padding: 1.25rem 1.5rem;
+  border-bottom: none;
+  border-top: none; 
+}
+
+/* Rândurile tabelului mai aerisite */
+.table tbody td {
+  padding: 1.25rem 1.5rem; /* Padding mărit pentru a se potrivi cu antetul */
+  vertical-align: middle;
+  color: #334155; /* Un text o idee mai blând decât negru pur */
+  border-bottom: 1px solid #f1f5f9; /* Linii despărțitoare foarte fine și subtile */
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+/* Efect hover rafinat */
+.table-hover tbody tr:hover td {
+  background-color: #f8fafc; /* Menținem un hover curat */
+}
+
+/* Eliminăm marginea ultimului rând pentru a păstra colțurile rotunde perfecte */
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Spațiere butoane acțiuni */
+.table td .btn {
+  margin-right: 0.5rem;
+}
+.table td .btn:last-child {
+  margin-right: 0;
+}
+
+/* --- BADGE-URI MODERNE PENTRU STATUS (Păstrate exact cum le-ai cerut) --- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px; 
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-completed {
+  background-color: #dcfce7; 
+  color: #166534;
+}
+
+.status-in-progress {
+  background-color: #e0f2fe; 
+  color: #0369a1;
+}
+
+.status-pending {
+  background-color: #fef3c7; 
+  color: #9a3412;
+}
+
+.status-cancelled {
+  background-color: #f1f5f9; 
+  color: #475569;
+  text-decoration: line-through; 
+}
