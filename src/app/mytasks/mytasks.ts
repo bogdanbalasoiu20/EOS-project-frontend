@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../services/tasksservice';
 import { TaskModal } from '../task-modal/task-modal';
@@ -13,7 +13,7 @@ import { TaskModal } from '../task-modal/task-modal';
 })
 export class Mytasks implements OnInit {
   private taskService = inject(TaskService);
-  tasks: any[] = [];
+  tasks = signal<any[]>([]);
   showModal = false;
   selectedTask: any = {};
 
@@ -22,11 +22,14 @@ export class Mytasks implements OnInit {
   }
 
   loadTasks() {
-    this.taskService.getTasks().subscribe(res => {this.tasks = res;});
+    this.taskService.getTasks().subscribe(res => {
+      console.log('TASKS:', res);
+      this.tasks.set(res);});
   }
 
   openNewTaskModal() {
 
+    //trimit catre TaskModal
     this.selectedTask = {
       taskName: '',
       dueDate: '',
@@ -39,7 +42,7 @@ export class Mytasks implements OnInit {
   }
 
   editTask(task: any) {
-    this.selectedTask = { ...task };
+    this.selectedTask = { ...task }; //face o copie a obiectului task pentru a evita modificarea directa a acestuia
     this.showModal = true;
   }
 

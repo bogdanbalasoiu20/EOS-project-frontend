@@ -18,7 +18,7 @@
   </thead>
 
   <tbody>
-    @for (task of tasks; track task.taskId) {
+    @for (task of tasks(); track task.taskId) {
       <tr>
         <td>{{ task.dueDate | date:'dd.MM.yyyy HH:mm' }}</td>
         <td>{{ task.taskName }}</td>

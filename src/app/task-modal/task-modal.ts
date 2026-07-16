@@ -24,8 +24,8 @@ export class TaskModal implements OnInit {
     createdBy: 'Ioana'   
   };
 
-    @Output() close = new EventEmitter<void>();
-    @Output() saved = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>();
+  @Output() saved = new EventEmitter<void>();
 
   statuses: any[] = [];
 
@@ -61,7 +61,8 @@ export class TaskModal implements OnInit {
     } else {
       this.taskService
         .createTask(this.task)
-        .subscribe(() => this.saved.emit());
+        .subscribe((task) => this.saved.emit()
+        );
     }
   }
 }
