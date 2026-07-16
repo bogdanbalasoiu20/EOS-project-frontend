@@ -1,0 +1,100 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    
+    <!-- Tab Switcher (Login / Register) -->
+    <div class="auth-tabs">
+      <button 
+        type="button"
+        class="tab-btn" 
+        [class.active]="isLogin" 
+        (click)="isLogin = true">
+        Login
+      </button>
+      <button 
+        type="button"
+        class="tab-btn" 
+        [class.active]="!isLogin" 
+        (click)="isLogin = false">
+        Register
+      </button>
+    </div>
+
+    <!-- LOGIN Form -->
+    <div *ngIf="isLogin" class="auth-form">
+      <h2>Welcome Back</h2>
+      <p class="auth-subtitle">Enter your credentials to sign in.</p>
+
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="name@example.com"
+          [(ngModel)]="loginData.email">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="password"
+          [(ngModel)]="loginData.password">
+      </div>
+
+      <button type="button" class="btn btn-primary btn-block" (click)="login()">
+        Login
+      </button>
+    </div>
+
+    <!-- REGISTER Form -->
+    <div *ngIf="!isLogin" class="auth-form">
+      <h2>Create Account</h2>
+      <p class="auth-subtitle">Fill in the details to create a new account.</p>
+
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="username"
+          [(ngModel)]="registerData.username">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="name@example.com"
+          [(ngModel)]="registerData.email">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="password"
+          
+          [(ngModel)]="registerData.password">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Birth Date</label>
+        <input
+          type="date"
+          class="form-control"
+          [(ngModel)]="registerData.birthDate">
+      </div>
+
+      <button type="button" class="btn btn-primary btn-block" (click)="register()">
+        Register
+      </button>
+    </div>
+
+    <!-- Error/Notification Message -->
+    <p *ngIf="message" class="auth-message">{{ message }}</p>
+
+  </div>
+</div>
