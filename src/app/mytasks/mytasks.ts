@@ -2,27 +2,51 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../services/tasksservice';
 import { TaskModal } from '../task-modal/task-modal';
+import { StatusService } from '../../services/statusservice';
+import { UserService } from '../../services/userservice';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-mytasks',
   standalone: true,
-  imports: [TaskModal, CommonModule],
+  imports: [TaskModal, CommonModule,FormsModule],
   templateUrl: './mytasks.html',
   styleUrl: './mytasks.css',
 })
 export class Mytasks implements OnInit {
   private taskService = inject(TaskService);
+  private statusService = inject(StatusService);
+  private userService = inject(UserService);
   tasks = signal<any[]>([]);
   showModal = false;
   selectedTask: any = {};
+  statuses: any[] = [];
+  users: any[] = [];
+  showFilters = false;
 
-  ngOnInit(): void {   
+  searchCriteria = {
+    keyword: '',
+    status: '',
+    userId: null as number | null,
+    dueDate: ''
+  };
+
+  ngOnInit(): void {
     this.loadTasks();
+
+    this.statusService.getStatuses().subscribe(res => {
+      this.statuses = res.filter(status =>
+        ['Pending', 'In Progress', 'Completed', 'Cancelled']
+          .includes(status.statusName)
+      );
+    });
+
+    this.userService.getUsers().subscribe(res => {this.users = res;});
   }
 
   loadTasks() {
-    this.taskService.getTasks().subscribe(res => {
+    this.taskService.getTasks(this.searchCriteria).subscribe(res => {
       console.log('TASKS:', res);
       this.tasks.set(res);});
   }
@@ -65,5 +89,24 @@ export class Mytasks implements OnInit {
       this.loadTasks();
     });
 
+  }
+
+  searchTasks() {
+    this.loadTasks();
+  }
+
+  resetFilters() {
+    this.searchCriteria = {
+        keyword: '',
+        status: '',
+        userId: null,
+        dueDate: ''
+    };
+
+    this.loadTasks();
+  }
+
+  toggleFilters() {
+    this.showFilters = !this.showFilters;
   }
 }

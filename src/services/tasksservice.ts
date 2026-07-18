@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,8 +8,26 @@ export class TaskService {
   private http = inject(HttpClient);
   private api = 'http://localhost:8080/tasks';
 
-  getTasks() {
-    return this.http.get<any[]>(this.api);
+  getTasks(filters: any) {
+    let params = new HttpParams();
+
+    if (filters.keyword) {
+      params = params.set('keyword', filters.keyword);
+    }
+
+    if (filters.status) {
+      params = params.set('status', filters.status);
+    }
+
+    if (filters.userId != null) {
+      params = params.set('userId', filters.userId);
+    }
+
+    if (filters.dueDate) {
+      params = params.set('dueDate', filters.dueDate);
+    }
+
+    return this.http.get<any[]>(this.api, { params });
   }
 
   createTask(task: any) {
