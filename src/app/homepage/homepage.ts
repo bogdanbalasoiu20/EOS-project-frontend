@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-homepage',
@@ -8,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './homepage.css',
 })
 export class Homepage implements OnInit {
-  username = "";
+
+  username = '';
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
   ngOnInit(): void {
-    this.username = localStorage.getItem('username') || '';
+    if (isPlatformBrowser(this.platformId)) {
+      this.username = localStorage.getItem('username') ?? '';
+    }
   }
 }
