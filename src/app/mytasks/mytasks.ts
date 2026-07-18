@@ -28,7 +28,8 @@ export class Mytasks implements OnInit {
   searchCriteria = {
     keyword: '',
     status: '',
-    userId: null as number | null,
+    userId: null as number | 'unassigned' | null,
+    unassigned: false,
     dueDate: ''
   };
 
@@ -45,10 +46,10 @@ export class Mytasks implements OnInit {
     this.userService.getUsers().subscribe(res => {this.users = res;});
   }
 
-  loadTasks() {
-    this.taskService.getTasks(this.searchCriteria).subscribe(res => {
-      console.log('TASKS:', res);
-      this.tasks.set(res);});
+  loadTasks(filters = this.searchCriteria) {
+    this.taskService.getTasks(filters).subscribe(res => {
+      this.tasks.set(res);
+    });
   }
 
   openNewTaskModal() {
@@ -92,7 +93,20 @@ export class Mytasks implements OnInit {
   }
 
   searchTasks() {
-    this.loadTasks();
+
+    const filters = {
+      ...this.searchCriteria
+    };
+
+    if (filters.userId === 'unassigned') {
+      filters.userId = null;
+      filters.unassigned = true;
+    } else {
+      filters.unassigned = false;
+    }
+
+    this.loadTasks(filters);
+
   }
 
   resetFilters() {
@@ -100,6 +114,7 @@ export class Mytasks implements OnInit {
         keyword: '',
         status: '',
         userId: null,
+        unassigned: false,
         dueDate: ''
     };
 

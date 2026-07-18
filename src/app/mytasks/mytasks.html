@@ -41,6 +41,10 @@
               All Users
             </option>
 
+            <option [ngValue]="'unassigned'">
+              Unassigned
+            </option>
+
             @for (user of users; track user.userId) {
               <option [ngValue]="user.userId">
                 {{ user.username }}

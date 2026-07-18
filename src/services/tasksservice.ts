@@ -23,6 +23,10 @@ export class TaskService {
       params = params.set('userId', filters.userId);
     }
 
+    if (filters.unassigned) {
+      params = params.set('unassigned', 'true');
+    }
+
     if (filters.dueDate) {
       params = params.set('dueDate', filters.dueDate);
     }
