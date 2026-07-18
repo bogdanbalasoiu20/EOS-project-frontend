@@ -18,6 +18,7 @@
 
         <div class="mb-3">
           <label class="form-label">Task Name</label>
+
           <input
             type="text"
             class="form-control"
@@ -26,6 +27,7 @@
 
         <div class="mb-3">
           <label class="form-label">Due Date</label>
+
           <input
             type="datetime-local"
             class="form-control"
@@ -40,17 +42,32 @@
             [(ngModel)]="task.statusTypeId">
 
             @for (status of statuses; track status.statusTypeId) {
-                <option [value]="status.statusTypeId">
+              <option [value]="status.statusTypeId">
                 {{ status.statusName }}
-                </option>
+              </option>
             }
 
-           </select>
+          </select>
+        </div>
 
-           <!-- <p>{{ statuses.length }}</p>
-           @for (status of statuses; track status.statusTypeId) {
-                <p>{{ status.statusName }}</p>
-           } -->
+        <div class="mb-3">
+          <label class="form-label">Assigned To</label>
+
+          <select
+              class="form-select"
+              [(ngModel)]="task.userId">
+
+              <option [ngValue]="null">
+                  Unassigned
+              </option>
+
+              @for (user of users; track user.userId) {
+                  <option [ngValue]="user.userId">
+                      {{ user.username }}
+                  </option>
+              }
+
+          </select>
         </div>
 
       </div>

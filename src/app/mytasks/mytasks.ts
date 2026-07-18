@@ -34,7 +34,7 @@ export class Mytasks implements OnInit {
       taskName: '',
       dueDate: '',
       statusTypeId: 'P',
-      userId: 1,
+      userId: null,
       createdBy: 'Ioana'
     };
 

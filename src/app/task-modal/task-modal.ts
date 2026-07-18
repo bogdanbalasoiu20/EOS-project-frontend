@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
 import { StatusService } from '../../services/statusservice';
+import { UserService } from '../../services/userservice';
 
 @Component({
   selector: 'app-task-modal',
@@ -15,12 +16,13 @@ import { StatusService } from '../../services/statusservice';
 export class TaskModal implements OnInit {
   private taskService = inject(TaskService);
   private statusService = inject(StatusService);
+  private userService = inject(UserService);
 
   @Input() task: any = {
     taskName: '',
     dueDate: '',
     statusTypeId: 'P',   
-    userId: 1,           
+    userId: null,           
     createdBy: 'Ioana'   
   };
 
@@ -28,28 +30,25 @@ export class TaskModal implements OnInit {
   @Output() saved = new EventEmitter<void>();
 
   statuses: any[] = [];
+  users: any[] = [];
 
   ngOnInit(): void {
     this.statusService.getStatuses().subscribe(res => {
-
-      console.log('RES:', res);
 
       this.statuses = res.filter(status =>
         ['Pending', 'In Progress', 'Completed', 'Cancelled']
           .includes(status.statusName)
       );
 
-      console.log('FILTERED:', this.statuses);
+      this.userService.getUsers().subscribe(users => {
+        this.users = users;
+      });
 
     });
   }
 
 
   saveTask() {
-    if (!this.task.userId) {
-      this.task.userId = 1;
-    }
-
     if (!this.task.createdBy) {
       this.task.createdBy = 'Ioana';
     }

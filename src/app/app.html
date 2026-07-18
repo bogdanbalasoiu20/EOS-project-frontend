@@ -1,14 +1,14 @@
 @if (showNavbar()) {
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
 
-  <a class="navbar-brand" routerLink="/home">EOS</a>
+  <a class="navbar-brand" routerLink="/home" >EOS</a>
 
   <div class="navbar-nav">
-    <a class="nav-link" routerLink="/home">Home</a>
+    <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
 
     @if (isLoggedIn()) {
-      <a class="nav-link" routerLink="/mytasks">My Tasks</a>
-      <a class="nav-link" routerLink="/search">Search</a>
+      <a class="nav-link" routerLink="/mytasks" routerLinkActive="active">My Tasks</a>
+      <a class="nav-link" routerLink="/search" routerLinkActive="active">Search</a>
     }
   </div>
 
