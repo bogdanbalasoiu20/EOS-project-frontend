@@ -1,1 +1,6 @@
-<h2>Welcome, {{ username }}!</h2>
+@if (isLoggedIn) {
+  <h2>Welcome, {{ username }}!</h2>
+} @else {
+  <h2>Welcome to EOS Task Manager!</h2>
+  <p>Log in or create an account to manage your tasks.</p>
+}

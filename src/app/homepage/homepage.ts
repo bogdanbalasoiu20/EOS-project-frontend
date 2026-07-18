@@ -11,12 +11,14 @@ import { isPlatformBrowser } from '@angular/common';
 export class Homepage implements OnInit {
 
   username = '';
+  isLoggedIn = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.username = localStorage.getItem('username') ?? '';
+      this.isLoggedIn = this.username !== '';
     }
   }
 }

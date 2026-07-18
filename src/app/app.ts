@@ -1,12 +1,30 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('proiect-eos');
+  username = '';
+
+  constructor(private router: Router) {}
+
+  showNavbar(): boolean {
+    return this.router.url !== '/login';
+  }
+
+  isLoggedIn(): boolean {
+    this.username = localStorage.getItem('username') ?? '';
+    return this.username !== '';
+  }
+
+  logout(): void {
+    localStorage.removeItem('username');
+    this.router.navigate(['/home']);
+  }
 }
