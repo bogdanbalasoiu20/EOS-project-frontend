@@ -24,7 +24,7 @@ export class App {
   }
 
   logout(): void {
-    localStorage.removeItem('username');
-    this.router.navigate(['/home']);
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

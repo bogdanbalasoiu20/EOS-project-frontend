@@ -33,29 +33,30 @@ export class LoginComponent {
   message = '';
 
   login() {
-  this.authService.login(this.loginData).subscribe({
-    next: (res) => {
-      localStorage.setItem('username', res.username);
-      this.message = res.message;
-      this.router.navigate(['/home']);
-    },
-    error: (err) => {
-      this.message = err.error.message;
-    }
-  });
-}
+    this.authService.login(this.loginData).subscribe({
+      next: (res) => {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('username', res.username);
+        this.message = res.message;
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        this.message = err.error.message;
+      }
+    });
+  }
 
   register() {
-  this.authService.register(this.registerData).subscribe({
-    next: () => {
-      this.loginData.email = this.registerData.email;
-      this.loginData.password = this.registerData.password;
+    this.authService.register(this.registerData).subscribe({
+      next: () => {
+        this.loginData.email = this.registerData.email;
+        this.loginData.password = this.registerData.password;
 
-      this.login();
-    },
-    error: (err) => {
-      this.message = err.error.message;
-    }
-  });
-}
+        this.login();
+      },
+      error: (err) => {
+        this.message = err.error.message;
+      }
+    });
+  }
 }
