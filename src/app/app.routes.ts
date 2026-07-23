@@ -4,11 +4,12 @@ import { Search } from './search/search';
 import { Mytasks } from './mytasks/mytasks';
 import { LoginComponent } from './login-component/login-component';
 import { LoggedInGuard } from '../services/logged-in-guard';
+import { guestGuard } from '../services/guest.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
 
   { path: 'home', component: Homepage },
   { path: 'mytasks', component: Mytasks, canActivate: [LoggedInGuard] },

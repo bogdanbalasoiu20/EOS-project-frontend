@@ -22,7 +22,7 @@ export class LoggedInGuard implements CanActivate {
       return false;
     }
 
-    if (localStorage.getItem('username')) {
+    if (localStorage.getItem('token')) {
       return true;
     }
 
