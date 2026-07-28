@@ -29,6 +29,7 @@ export const authenticationInterceptor: HttpInterceptorFn = (req, next) => {
             if(error.status===401||error.status===403){ // utilizatorul nu mai are acces (token invalid sau expirat), iar request-urile pot esua, deci stergem datele din localStorage si redirectionam utilizatorul catre pagina de login
                 localStorage.removeItem('token');
                 localStorage.removeItem('username');
+                localStorage.removeItem('role');
                 router.navigate(['/login']);
             }
         

@@ -26,6 +26,10 @@ export class LoggedInGuard implements CanActivate {
       return true;
     }
 
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('role');
+
     this.router.navigate(['/login']);
     return false;
   }

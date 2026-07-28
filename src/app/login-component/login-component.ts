@@ -39,6 +39,7 @@ export class LoginComponent {
         
         localStorage.setItem('token', res.token);
         localStorage.setItem('username', res.username);
+        localStorage.setItem('role', res.role);
         this.message = res.message;
         this.router.navigate(['/home']);
       },

@@ -22,8 +22,7 @@ export class TaskModal implements OnInit {
     taskName: '',
     dueDate: '',
     statusTypeId: 'P',   
-    userId: null,           
-    createdBy: 'Ioana'   
+    userId: null 
   };
 
   @Output() close = new EventEmitter<void>();
@@ -49,9 +48,6 @@ export class TaskModal implements OnInit {
 
 
   saveTask() {
-    if (!this.task.createdBy) {
-      this.task.createdBy = 'Ioana';
-    }
 
     if (this.task.taskId) {
       this.taskService

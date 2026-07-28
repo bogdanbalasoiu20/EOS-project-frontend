@@ -59,8 +59,7 @@ export class Mytasks implements OnInit {
       taskName: '',
       dueDate: '',
       statusTypeId: 'P',
-      userId: null,
-      createdBy: 'Ioana'
+      userId: null
     };
 
     this.showModal = true;
@@ -123,5 +122,9 @@ export class Mytasks implements OnInit {
 
   toggleFilters() {
     this.showFilters = !this.showFilters;
+  }
+
+  isAdmin(): boolean {
+    return localStorage.getItem('role') === 'ADMIN';
   }
 }

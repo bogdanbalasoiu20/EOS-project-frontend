@@ -111,13 +111,15 @@
 
 </div>
 
-<div class="mb-3">
-  <button
-    class="btn btn-primary"
-    (click)="openNewTaskModal()">
-    New Task
-  </button>
-</div>
+@if (isAdmin()) {
+  <div class="mb-3">
+    <button
+      class="btn btn-primary"
+      (click)="openNewTaskModal()">
+      New Task
+    </button>
+  </div>
+}
 
 <table class="table table-hover">
   <thead>
@@ -127,7 +129,9 @@
     <th>Assigned To</th>
     <th>Status</th>
     <th>Created By</th>
-    <th>Actions</th>
+    @if(isAdmin()) {
+      <th>Actions</th>
+    }
   </tr>
 </thead>
 
@@ -158,19 +162,23 @@
 
       <td>{{ task.createdBy }}</td>
 
-      <td>
-        <button
-          class="btn btn-warning btn-sm me-2"
-          (click)="editTask(task)">
-          Edit
-        </button>
+      
+        @if (isAdmin()) {
+        <td>
+          <button
+            class="btn btn-warning btn-sm me-2"
+            (click)="editTask(task)">
+            Edit
+          </button>
 
-        <button
-          class="btn btn-danger btn-sm"
-          (click)="deleteTask(task.taskId)">
-          Delete
-        </button>
-      </td>
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="deleteTask(task.taskId)">
+            Delete
+          </button>
+        </td>
+        }
+      
     </tr>
   }
 </tbody>

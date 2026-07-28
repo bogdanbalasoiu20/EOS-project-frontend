@@ -19,8 +19,15 @@ export class App {
   }
 
   isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      this.username = '';
+      return false;
+    }
+
     this.username = localStorage.getItem('username') ?? '';
-    return this.username !== '';
+    return true;
   }
 
   logout(): void {
