@@ -1,21 +1,59 @@
-/* --- TABELUL DE TASKS (Design Rafinat) --- */
+/* ==========================================================================
+   PAGE HEADER CU ICONIȚĂ
+   ========================================================================== */
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+
+.title-icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: #e0e7ff; /* Indigo deschis */
+  color: #4f46e5;            /* Indigo vibrant */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.08);
+  flex-shrink: 0;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   TABELUL DE TASKS
+   ========================================================================== */
 .table {
-  background-color: var(--card-bg);
-  border-radius: var(--radius);
+  background-color: var(--card-bg, #ffffff);
+  border-radius: var(--radius, 12px);
   overflow: hidden; 
   border-collapse: separate;
   border-spacing: 0;
-  border: 1px solid var(--border-color);
-  /* O umbră mai difuză și mai moale pentru un aspect de "plutire" */
+  border: 1px solid var(--border-color, #e2e8f0);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); 
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   width: 100%;
 }
 
-/* Antet mai curat, cu text ușor mai mic și spațiat */
 .table thead th {
-  background-color: #1e293b; /* Albastru închis spre gri (Slate 800) */
-  color: #f1f5f9;            /* Text alb-gri deschis pentru contrast perfect */
+  background-color: #1e293b;
+  color: #f1f5f9;
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.725rem;
@@ -25,85 +63,143 @@
   border-top: none; 
 }
 
-/* Rândurile tabelului mai aerisite */
 .table tbody td {
-  padding: 1.25rem 1.5rem; /* Padding mărit pentru a se potrivi cu antetul */
+  padding: 1.1rem 1.5rem;
   vertical-align: middle;
-  color: #334155; /* Un text o idee mai blând decât negru pur */
-  border-bottom: 1px solid #f1f5f9; /* Linii despărțitoare foarte fine și subtile */
-  font-size: 0.95rem;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.925rem;
   transition: background-color 0.2s ease;
 }
 
-/* Efect hover rafinat */
 .table-hover tbody tr:hover td {
-  background-color: #f8fafc; /* Menținem un hover curat */
+  background-color: #f8fafc;
 }
 
-/* Eliminăm marginea ultimului rând pentru a păstra colțurile rotunde perfecte */
 .table tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* Spațiere butoane acțiuni */
+/* ==========================================================================
+   BUTOANE DE ACȚIUNE MODERNE (Soft / Subtle Style)
+   ========================================================================== */
 .table td .btn {
-  margin-right: 0.5rem;
+  margin-right: 0.35rem;
+  border: none;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
 }
+
 .table td .btn:last-child {
   margin-right: 0;
 }
 
-/* --- BADGE-URI MODERNE PENTRU STATUS (Păstrate exact cum le-ai cerut) --- */
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px; 
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+/* Buton Edit (Blue Soft) */
+.btn-warning, .btn-warning.btn-sm {
+  background-color: #eff6ff !important;
+  color: #2563eb !important;
 }
 
-.status-completed {
-  background-color: #dcfce7; 
-  color: #166534;
+.btn-warning:hover, .btn-warning.btn-sm:hover {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
 }
 
-.status-in-progress {
-  background-color: #e0f2fe; 
-  color: #0369a1;
+/* Buton Delete (Rose/Danger Soft) */
+.btn-danger, .btn-danger.btn-sm {
+  background-color: #ffe4e6 !important;
+  color: #e11d48 !important;
 }
 
-.status-pending {
-  background-color: #fef3c7; 
-  color: #9a3412;
-}
-
-.status-cancelled {
-  background-color: #f1f5f9; 
-  color: #475569;
-  text-decoration: line-through; 
+.btn-danger:hover, .btn-danger.btn-sm:hover {
+  background-color: #e11d48 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.25);
 }
 
 /* ==========================================================================
-   CARD FILTRE - DESIGN PREMIUM & CLEAN
+   BADGE-URI STATUS MODERNE
    ========================================================================== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px; 
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+}
 
-/* Containerul principal al filtrelor */
+/* Bulină mică indicatoare de status */
+.status-badge::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Status: Completed (Emerald) */
+.status-completed {
+  background-color: #ecfdf5; 
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+.status-completed::before {
+  background-color: #10b981;
+}
+
+/* Status: In Progress (Indigo) */
+.status-in-progress {
+  background-color: #e0e7ff; 
+  color: #4338ca;
+  border: 1px solid #c7d2fe;
+}
+.status-in-progress::before {
+  background-color: #6366f1;
+}
+
+/* Status: Pending (Amber) */
+.status-pending {
+  background-color: #fffbeb; 
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+.status-pending::before {
+  background-color: #f59e0b;
+}
+
+/* Status: Cancelled (Gray / Muted) */
+.status-cancelled {
+  background-color: #f3f4f6; 
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+}
+.status-cancelled::before {
+  background-color: #9ca3af;
+}
+
+/* ==========================================================================
+   CARD FILTRE
+   ========================================================================== */
 .card.mb-4 {
   background-color: var(--card-bg, #ffffff);
   border: 1px solid var(--border-color, #e2e8f0);
   border-radius: var(--radius, 12px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); /* Umbră discretă identică cu tabelul */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
   overflow: hidden;
   margin-bottom: 1.75rem !important;
   transition: all 0.2s ease-in-out;
 }
 
-/* Antetul secțiunii de filtre (zona pe care se dă click) */
 .card-header {
-  background-color: #ffffff !important; /* Fundal alb curat */
+  background-color: #ffffff !important;
   padding: 1rem 1.5rem;
   border-bottom: 1px solid #f1f5f9;
   display: flex;
@@ -112,47 +208,40 @@
   transition: background-color 0.15s ease;
 }
 
-/* Efect discret la trecerea mouse-ului peste antet */
+.card.collapsed .card-header {
+  border-bottom: none;
+}
+
 .card-header:hover {
   background-color: #f8fafc !important;
 }
 
-/* Textul "Search Tasks" */
 .card-header strong {
-  color: #1e293b; /* Culoare identică cu textul din tabel */
+  color: #1e293b;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
 
-/* Iconița de tip săgeată (Chevron) */
 .card-header .bi {
-  color: #64748b; /* Slate gray pentru un aspect minimalist */
+  color: #64748b;
   transition: transform 0.2s ease;
 }
 
-/* Zona interioară în care se află input-urile */
 .card-body {
   padding: 1.5rem;
   background-color: #ffffff;
 }
 
-/* Grila și spațierea grupurilor de input-uri */
-.card-body .row {
-  margin-bottom: 0.5rem;
-}
-
-/* Etichetele câmpurilor (Subject, Status etc.) */
 .card-body .form-label {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #64748b; /* Corelat cu etichetele din restul aplicației */
+  color: #64748b;
   margin-bottom: 0.5rem;
 }
 
-/* Design rafinat pentru input-uri și select-uri */
 .card-body .form-control,
 .card-body .form-select {
   border: 1px solid #e2e8f0;
@@ -164,15 +253,30 @@
   transition: all 0.15s ease-in-out;
 }
 
-/* Efect de focus fin */
 .card-body .form-control:focus,
 .card-body .form-select:focus {
-  border-color: #a5b4fc; /* Indigo deschis */
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.08); /* Glow foarte discret */
+  border-color: #a5b4fc;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.08);
   outline: none;
 }
 
-/* Suprascriere pentru butonul Reset (stil modern variantă contur/ghost) */
+.disabled-user-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: var(--radius-sm, 8px);
+  color: #475569;
+  font-size: 0.925rem;
+  font-weight: 500;
+}
+
+.disabled-user-chip i {
+  color: #64748b;
+}
+
 .btn-outline-secondary {
   background-color: transparent;
   border: 1px solid #e2e8f0;
@@ -187,13 +291,46 @@
   color: #334155;
 }
 
-/* Alinierea secțiunii de butoane (Search / Reset) */
 .card-body .d-flex.justify-content-end {
   margin-top: 1rem;
-  gap: 0.5rem; /* Înlocuiește me-2 din Bootstrap cu un spațiu controlat fix */
+  gap: 0.5rem;
 }
 
+/* ==========================================================================
+   EMPTY STATE
+   ========================================================================== */
+.empty-state-card {
+  background-color: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: var(--radius, 12px);
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  margin-top: 1.5rem;
+}
 
-.disabled-input {
-  opacity: 0.65;
+.empty-state-icon {
+  width: 56px;
+  height: 56px;
+  background-color: #f1f5f9;
+  color: #64748b;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state-card h5 {
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state-card p {
+  color: #64748b;
+  font-size: 0.9rem;
+  max-width: 400px;
+  margin: 0 auto;
 }

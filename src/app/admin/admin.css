@@ -117,3 +117,64 @@
   border-radius: var(--radius-sm, 8px);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
+
+
+/* ==========================================================================
+   HEADER PAGINĂ ADMIN
+   ========================================================================== */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+
+.page-title-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Spațiu între iconiță și titlu */
+}
+
+/* Container iconiță stânga */
+.icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background-color: #eef2ff; /* Indigo foarte deschis */
+  color: var(--primary-color, #4f46e5); /* Indigo accent */
+  border-radius: var(--radius-sm, 10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.08);
+}
+
+/* Titlu principal */
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Subtitlu elegant */
+.page-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0.25rem 0 0 0;
+}
+
+/* Badge contor utilizatori (dreapta) */
+.user-count-badge {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+}

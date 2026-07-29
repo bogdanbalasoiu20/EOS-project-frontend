@@ -17,6 +17,7 @@ export class LoginComponent {
   private router = inject(Router);
 
   isLogin = true;
+  showPassword = false;
 
   loginData = {
     email: '',
@@ -61,5 +62,9 @@ export class LoginComponent {
         this.message = err.error.message;
       }
     });
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 }

@@ -14,17 +14,25 @@ import { UserAdmin } from '../models/UserAdmin';
 export class Admin implements OnInit {
   private userService = inject(UserService);
   users = signal<UserAdmin[]>([]);
+  searchKeyword = '';
 
-  ngOnInit(): void {
-    this.userService.getUsers().subscribe(res => {
+  ngOnInit() {
+      this.loadUsers();
+  }
 
-      const users = res.map(user => ({
-        ...user,
-        originalRole: user.role
-      }));
+  loadUsers() {
+    this.userService.getUsers(this.searchKeyword).subscribe(res => {
+        const users = res.map(user => ({
+          ...user,
+          originalRole: user.role
+        }));
 
-      this.users.set(users);
-    });
+        this.users.set(users);
+      });
+  }
+
+  searchUsers() {
+      this.loadUsers();
   }
 
   saveRole(user: UserAdmin) {
