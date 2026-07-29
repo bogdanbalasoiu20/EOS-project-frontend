@@ -31,7 +31,9 @@ export class Mytasks implements OnInit {
     status: '',
     userId: null as number | 'unassigned' | null,
     unassigned: false,
-    dueDate: ''
+    period: '',
+    start: '',
+    end: ''
   };
 
   ngOnInit(): void {
@@ -105,18 +107,25 @@ export class Mytasks implements OnInit {
       filters.unassigned = false;
     }
 
+    // daca sunt setate start sau end, sterg period pentru a nu avea conflicte
+    if (filters.start || filters.end) {
+      filters.period = '';
+    }
+
     this.loadTasks(filters);
 
   }
 
   resetFilters() {
     this.searchCriteria = {
-        keyword: '',
-        status: '',
-        userId: null,
-        unassigned: false,
-        dueDate: ''
-    };
+    keyword: '',
+    status: '',
+    userId: null as number | 'unassigned' | null,
+    unassigned: false,
+    period: '',
+    start: '',
+    end: ''
+  };
 
     this.loadTasks();
   }
@@ -127,5 +136,12 @@ export class Mytasks implements OnInit {
 
   isAdmin(): boolean {
     return localStorage.getItem('role') === 'ADMIN';
+  }
+
+  // metoda care seteaza perioada de filtrare si reseteaza start si end pentru a evita conflictele
+  selectPeriod(period: string) {
+    this.searchCriteria.period = period;
+    this.searchCriteria.start = '';
+    this.searchCriteria.end = '';
   }
 }

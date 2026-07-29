@@ -6,6 +6,7 @@ import { LoginComponent } from './login-component/login-component';
 import { LoggedInGuard } from '../services/logged-in-guard';
 import { guestGuard } from '../services/guest.guard';
 import { Admin } from './admin/admin';
+import { AdminGuard } from '../services/admin.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,7 +17,7 @@ export const routes: Routes = [
   { path: 'mytasks', component: Mytasks, canActivate: [LoggedInGuard] },  //nu pot accesa pagina mytasks daca nu sunt logat
   { path: 'search', component: Search, canActivate: [LoggedInGuard] },
 
-  {path: 'admin', component: Admin, canActivate:[LoggedInGuard]},
+  {path: 'admin', component: Admin, canActivate:[AdminGuard]}, //pagina de admin poate fi accesata doar de userii cu rolul ADMIN
 
   { path: '**', redirectTo: '/login' }
 ];

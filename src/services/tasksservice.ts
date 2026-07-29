@@ -31,6 +31,18 @@ export class TaskService {
       params = params.set('dueDate', filters.dueDate);
     }
 
+    if (filters.period) {
+      params = params.set('period', filters.period);
+    }
+
+    if (filters.start) {
+      params = params.set('start', filters.start);
+    }
+
+    if (filters.end) {
+      params = params.set('end', filters.end);
+    }
+
     return this.http.get<any[]>(this.api, { params });
   }
 

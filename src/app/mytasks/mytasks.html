@@ -35,102 +35,151 @@
 
     <div class="card-body">
 
-      <div class="row">
+  <div class="row">
 
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Subject</label>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Subject</label>
 
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search by subject..."
-            [(ngModel)]="searchCriteria.keyword">
-        </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by subject..."
+        [(ngModel)]="searchCriteria.keyword">
+    </div>
 
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Assigned To</label>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Assigned To</label>
 
-          @if (isAdmin()) {
-            <select
-              class="form-select"
-              [(ngModel)]="searchCriteria.userId">
+      @if (isAdmin()) {
+        <select
+          class="form-select"
+          [(ngModel)]="searchCriteria.userId">
 
-              <option [ngValue]="null">
-                All Users
-              </option>
+          <option [ngValue]="null">
+            All Users
+          </option>
 
-              <option [ngValue]="'unassigned'">
-                Unassigned
-              </option>
+          <option [ngValue]="'unassigned'">
+            Unassigned
+          </option>
 
-              @for (user of users; track user.userId) {
-                <option [ngValue]="user.userId">
-                  {{ user.username }}
-                </option>
-              }
-
-            </select>
-          } @else {
-            <div class="disabled-user-chip">
-              <i class="bi bi-person-fill"></i>
-              <span>{{ loggedUsername }}</span>
-              <small class="ms-auto text-muted">(Your Account)</small>
-            </div>
-          }
-        </div>
-
-      </div>
-
-      <div class="row">
-
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Status</label>
-
-          <select
-            class="form-select"
-            [(ngModel)]="searchCriteria.status">
-
-            <option value="">
-              All Statuses
+          @for (user of users; track user.userId) {
+            <option [ngValue]="user.userId">
+              {{ user.username }}
             </option>
+          }
 
-            @for (status of statuses; track status.statusTypeId) {
-              <option [value]="status.statusName">
-                {{ status.statusName }}
-              </option>
-            }
-
-          </select>
+        </select>
+      } @else {
+        <div class="disabled-user-chip">
+          <i class="bi bi-person-fill"></i>
+          <span>{{ loggedUsername }}</span>
+          <small class="ms-auto text-muted">(Your Account)</small>
         </div>
+      }
+    </div>
 
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Due Date</label>
+  </div>
 
-          <input
-            type="date"
-            class="form-control"
-            [(ngModel)]="searchCriteria.dueDate">
-        </div>
+  <div class="row">
 
-      </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Status</label>
 
-      <div class="d-flex justify-content-end">
+      <select
+        class="form-select"
+        [(ngModel)]="searchCriteria.status">
 
-        <button
-          class="btn btn-outline-secondary me-2"
-          (click)="resetFilters()">
-          Reset
-        </button>
+        <option value="">
+          All Statuses
+        </option>
 
-        <button
-          class="btn btn-primary"
-          (click)="searchTasks()">
-          Search
-        </button>
+        @for (status of statuses; track status.statusTypeId) {
+          <option [value]="status.statusName">
+            {{ status.statusName }}
+          </option>
+        }
 
-      </div>
+      </select>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <label class="form-label">From</label>
+
+      <input
+        type="date"
+        class="form-control"
+        [(ngModel)]="searchCriteria.start">
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <label class="form-label">To</label>
+
+      <input
+        type="date"
+        class="form-control"
+        [(ngModel)]="searchCriteria.end">
+    </div>
+
+  </div>
+
+  <div class="mb-3">
+
+    <label class="form-label">Quick Filters</label>
+
+    <div class="d-flex flex-wrap gap-2">
+
+      <button
+        type="button"
+        class="btn"
+        [ngClass]="searchCriteria.period === 'TODAY'
+            ? 'btn-primary'
+            : 'btn-outline-primary'"
+        (click)="selectPeriod('TODAY')">
+        Today
+      </button>
+
+      <button
+        type="button"
+        class="btn"
+        [ngClass]="searchCriteria.period === 'THIS_WEEK'
+            ? 'btn-primary'
+            : 'btn-outline-primary'"
+        (click)="selectPeriod('THIS_WEEK')">
+        This Week
+      </button>
+
+      <button
+        type="button"
+        class="btn"
+        [ngClass]="searchCriteria.period === 'OVERDUE'
+            ? 'btn-primary'
+            : 'btn-outline-primary'"
+        (click)="selectPeriod('OVERDUE')">
+        Overdue
+      </button>
 
     </div>
+
+  </div>
+
+  <div class="d-flex justify-content-end">
+
+    <button
+      class="btn btn-outline-secondary me-2"
+      (click)="resetFilters()">
+      Reset
+    </button>
+
+    <button
+      class="btn btn-primary"
+      (click)="searchTasks()">
+      Search
+    </button>
+
+  </div>
+
+</div>
 
   }
 
