@@ -34,4 +34,8 @@ export class App {
     localStorage.clear();
     this.router.navigate(['/login']);
   }
+
+  isAdmin(): boolean {
+    return localStorage.getItem('role') === 'ADMIN';
+  }
 }

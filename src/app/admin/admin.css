@@ -1,0 +1,119 @@
+/* ==========================================================================
+   ADMIN PANEL - USER MANAGEMENT
+   ========================================================================== */
+
+/* Titlul paginii */
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+/* --- TABEL ADMIN --- */
+.table {
+  background-color: var(--card-bg, #ffffff);
+  border-radius: var(--radius, 12px);
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border-color, #e2e8f0);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  width: 100%;
+}
+
+/* Antetul tabelului (Header închis la culoare, la fel ca la tasks) */
+.table thead th {
+  background-color: #1e293b;
+  color: #f1f5f9;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.725rem;
+  letter-spacing: 0.08em;
+  padding: 1.1rem 1.5rem;
+  border: none;
+}
+
+/* Celulele din corp */
+.table tbody td {
+  padding: 1rem 1.5rem;
+  vertical-align: middle;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.925rem;
+  transition: background-color 0.15s ease;
+}
+
+.table-hover tbody tr:hover td {
+  background-color: #f8fafc;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Stilizare date utilizator */
+.user-name {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.user-email {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+/* --- BADGE-URI PENTRU ROLURI (Role Badges) --- */
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Rol: ADMIN (Indigo/Violet modern) */
+.role-admin {
+  background-color: #e0e7ff;
+  color: #4338ca;
+  border: 1px solid #c7d2fe;
+}
+
+/* Rol: USER (Gri neutru/Slate) */
+.role-user {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+/* --- DROPDOWN SELECT --- */
+.table .form-select {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm, 8px);
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  background-color: #ffffff;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.table .form-select:focus {
+  border-color: #a5b4fc;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  outline: none;
+}
+
+/* --- BUTON SAVE --- */
+.table .btn-primary {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm, 8px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}

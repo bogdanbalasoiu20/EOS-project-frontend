@@ -24,6 +24,7 @@ export class Mytasks implements OnInit {
   statuses: any[] = [];
   users: any[] = [];
   showFilters = false;
+  loggedUsername = localStorage.getItem('username');
 
   searchCriteria = {
     keyword: '',

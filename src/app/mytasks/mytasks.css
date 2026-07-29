@@ -192,3 +192,8 @@
   margin-top: 1rem;
   gap: 0.5rem; /* Înlocuiește me-2 din Bootstrap cu un spațiu controlat fix */
 }
+
+
+.disabled-input {
+  opacity: 0.65;
+}

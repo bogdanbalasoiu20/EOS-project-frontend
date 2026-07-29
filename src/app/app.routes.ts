@@ -5,6 +5,7 @@ import { Mytasks } from './mytasks/mytasks';
 import { LoginComponent } from './login-component/login-component';
 import { LoggedInGuard } from '../services/logged-in-guard';
 import { guestGuard } from '../services/guest.guard';
+import { Admin } from './admin/admin';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -14,6 +15,8 @@ export const routes: Routes = [
   { path: 'home', component: Homepage },
   { path: 'mytasks', component: Mytasks, canActivate: [LoggedInGuard] },  //nu pot accesa pagina mytasks daca nu sunt logat
   { path: 'search', component: Search, canActivate: [LoggedInGuard] },
+
+  {path: 'admin', component: Admin, canActivate:[LoggedInGuard]},
 
   { path: '**', redirectTo: '/login' }
 ];
