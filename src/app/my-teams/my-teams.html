@@ -1,0 +1,131 @@
+<div class="page-header">
+
+  <div class="d-flex align-items-center gap-3">
+
+    <div class="title-icon-box">
+      <i class="bi bi-people-fill"></i>
+    </div>
+
+    <div>
+      <h2 class="page-title mb-0">My Teams</h2>
+      <p class="page-subtitle">
+        Manage your teams and collaborate with other members.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="mb-4">
+
+  <button
+    class="btn btn-primary"
+    (click)="openNewTeamModal()">
+
+    <i class="bi bi-plus-lg me-1"></i>
+    New Team
+
+    </button>
+
+</div>
+
+
+<div class="card mb-4">
+
+  <div class="card-header">
+    <strong>Teams I Lead</strong>
+  </div>
+
+  <div class="card-body">
+
+    @if (leadingTeams().length > 0) {
+
+      <div class="list-group">
+
+        @for (team of leadingTeams(); track team.teamId) {
+
+          <div class="list-group-item d-flex justify-content-between align-items-center">
+
+            <div>
+              <h6 class="mb-1">{{ team.teamName }}</h6>
+              <small class="text-muted">
+                {{ team.description }}
+              </small>
+            </div>
+
+            <button
+                class="btn btn-outline-primary btn-sm"
+                [routerLink]="['/myteams', team.teamId]">
+                Manage
+            </button>
+
+          </div>
+
+        }
+
+      </div>
+
+    } @else {
+
+      <p class="text-muted mb-0">
+        You are not leading any teams.
+      </p>
+
+    }
+
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="card-header">
+    <strong>Teams I'm a Member Of</strong>
+  </div>
+
+  <div class="card-body">
+
+    @if (memberTeams().length > 0) {
+
+      <div class="list-group">
+
+        @for (team of memberTeams(); track team.teamId) {
+
+          <div class="list-group-item">
+
+            <h6 class="mb-1">{{ team.teamName }}</h6>
+
+            <small class="text-muted">
+              Leader: {{ team.teamLeaderUsername }}
+            </small>
+
+          </div>
+
+        }
+
+      </div>
+
+    } @else {
+
+      <p class="text-muted mb-0">
+        You are not a member of any team.
+      </p>
+
+    }
+
+  </div>
+
+</div>
+
+
+@if (showModal) {
+
+  <app-team-modal
+      [team]="selectedTeam"
+      (saved)="onTeamSaved()"
+      (close)="closeModal()">
+  </app-team-modal>
+
+}

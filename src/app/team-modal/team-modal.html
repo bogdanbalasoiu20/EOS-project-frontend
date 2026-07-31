@@ -1,0 +1,74 @@
+<div class="modal-backdrop">
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+
+      <h4 class="modal-title">
+        @if (team.teamId) {
+          Edit Team
+        } @else {
+          New Team
+        }
+      </h4>
+
+      <button
+        type="button"
+        class="btn-close"
+        (click)="close.emit()">
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Team Name
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter team name..."
+          [(ngModel)]="team.teamName">
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">
+          Description
+        </label>
+
+        <textarea
+          rows="4"
+          class="form-control"
+          placeholder="Describe the purpose of this team..."
+          [(ngModel)]="team.description">
+        </textarea>
+
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-outline-secondary"
+        (click)="close.emit()">
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        (click)="saveTeam()">
+        Save
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

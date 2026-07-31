@@ -1,0 +1,74 @@
+<div class="modal-backdrop">
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+
+      <h4 class="modal-title">
+        Add Member
+      </h4>
+
+      <button
+        type="button"
+        class="btn-close"
+        (click)="close.emit()">
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <label class="form-label">
+
+        User
+
+      </label>
+
+      <select
+        class="form-select"
+        [(ngModel)]="selectedUserId">
+
+        <option [ngValue]="null">
+
+          Select user
+
+        </option>
+
+        @for (user of users(); track user.userId) {
+
+          <option [ngValue]="user.userId">
+
+            {{ user.username }}
+
+          </option>
+
+        }
+
+      </select>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-outline-secondary"
+        (click)="close.emit()">
+
+        Cancel
+
+      </button>
+
+      <button
+        class="btn btn-primary"
+        [disabled]="selectedUserId == null"
+        (click)="addMember()">
+
+        Add
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
