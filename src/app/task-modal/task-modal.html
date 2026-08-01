@@ -1,8 +1,11 @@
 <div class="modal d-block" tabindex="-1">
+
   <div class="modal-dialog">
+
     <div class="modal-content">
 
       <div class="modal-header">
+
         <h5 class="modal-title">
           {{ task.taskId ? 'Edit Task' : 'New Task' }}
         </h5>
@@ -12,65 +15,136 @@
           class="btn-close"
           (click)="close.emit()">
         </button>
+
       </div>
 
       <div class="modal-body">
 
         <div class="mb-3">
-          <label class="form-label">Task Name</label>
+
+          <label class="form-label">
+            Task Name
+          </label>
 
           <input
             type="text"
             class="form-control"
             [(ngModel)]="task.taskName">
+
         </div>
 
+
+        <!--
+          Daca fixedTeamId este null inseamna ca modalul
+          este deschis din MyTasks si trebuie aleasa echipa.
+        -->
+
+        @if (fixedTeamId == null) {
+
+          <div class="mb-3">
+
+            <label class="form-label">
+              Team
+            </label>
+
+            <select
+              class="form-select"
+              [(ngModel)]="task.teamId"
+              (ngModelChange)="onTeamChange()">
+
+              <option [ngValue]="null">
+                Select Team
+              </option>
+
+              @for (team of teams(); track team.teamId) {
+
+                <option [ngValue]="team.teamId">
+                  {{ team.teamName }}
+                </option>
+
+              }
+
+            </select>
+
+          </div>
+
+        }
+
+
         <div class="mb-3">
-          <label class="form-label">Due Date</label>
+
+          <label class="form-label">
+            Assigned To
+          </label>
+
+          <select
+            class="form-select"
+            [(ngModel)]="task.userId"
+            [disabled]="task.teamId == null">
+
+            <option [ngValue]="null">
+              Unassigned
+            </option>
+
+            @for (user of users(); track user.userId) {
+
+              <option [ngValue]="user.userId">
+                {{ user.username }}
+              </option>
+
+            }
+
+          </select>
+
+          @if (task.teamId == null) {
+
+            <small class="text-muted">
+              Select a team first.
+            </small>
+
+          }
+
+        </div>
+
+
+        <div class="mb-3">
+
+          <label class="form-label">
+            Due Date
+          </label>
 
           <input
             type="datetime-local"
             class="form-control"
             [(ngModel)]="task.dueDate">
+
         </div>
 
+
         <div class="mb-3">
-          <label class="form-label">Status</label>
+
+          <label class="form-label">
+            Status
+          </label>
 
           <select
             class="form-select"
             [(ngModel)]="task.statusTypeId">
 
-            @for (status of statuses; track status.statusTypeId) {
+            @for (status of statuses(); track status.statusTypeId) {
+
               <option [value]="status.statusTypeId">
                 {{ status.statusName }}
               </option>
+
             }
 
           </select>
-        </div>
 
-        <div class="mb-3">
-          <label class="form-label">Assigned To</label>
-
-          <select
-              class="form-select"
-              [(ngModel)]="task.userId">
-
-              <option [ngValue]="null">
-                  Unassigned
-              </option>
-
-              @for (user of users; track user.userId) {
-                  <option [ngValue]="user.userId">
-                      {{ user.username }}
-                  </option>
-              }
-
-          </select>
         </div>
 
       </div>
+
 
       <div class="modal-footer">
 
@@ -78,18 +152,25 @@
           type="button"
           class="btn btn-secondary"
           (click)="close.emit()">
+
           Cancel
+
         </button>
 
         <button
           type="button"
           class="btn btn-primary"
+          [disabled]="task.teamId == null"
           (click)="saveTask()">
+
           Save
+
         </button>
 
       </div>
 
     </div>
+
   </div>
+
 </div>

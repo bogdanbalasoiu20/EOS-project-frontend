@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { TeamService } from '../../services/teamservice';
 import { AddMemberModal } from '../add-member-modal/add-member-modal';
+import { TaskModal } from '../task-modal/task-modal';
 
 @Component({
   selector: 'app-team-details',
   standalone: true,
-  imports: [CommonModule, AddMemberModal],
+  imports: [CommonModule, AddMemberModal, TaskModal],
   templateUrl: './team-details.html',
   styleUrl: './team-details.css',
 })
@@ -18,6 +19,8 @@ export class TeamDetails implements OnInit {
   team: any = {};
   members = signal<any[]>([]);
   showAddMemberModal = false;
+  showTaskModal = false;
+  selectedTask: any = {};
 
   ngOnInit(): void {
     const teamId = Number(this.route.snapshot.paramMap.get('teamId'));
@@ -61,6 +64,27 @@ export class TeamDetails implements OnInit {
 
         });
 
+  }
+
+  // acelasi taskmodal ca in mytasks, dar cu echipa fixa
+  openNewTaskModal() {
+    this.selectedTask = {
+      taskName: '',
+      dueDate: '',
+      statusTypeId: 'P',
+      userId: null,
+      teamId: this.team.teamId
+    };
+
+    this.showTaskModal = true;
+  }
+
+  closeTaskModal() {
+    this.showTaskModal = false;
+  }
+
+  onTaskSaved() {
+    this.showTaskModal = false;
   }
 
 }

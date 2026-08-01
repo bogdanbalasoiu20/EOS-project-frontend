@@ -9,6 +9,10 @@ export class TeamService {
   private http = inject(HttpClient);
   private api = 'http://localhost:8080/teams';
 
+  getTeams() {
+    return this.http.get<any[]>(this.api);
+  }
+
   getLeadingTeams() {
     return this.http.get<any[]>(`${this.api}/my/leading`);
   }

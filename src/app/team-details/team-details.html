@@ -90,6 +90,19 @@
 
 </div>
 
+<div class="d-flex justify-content-end mb-4">
+
+  <button
+    class="btn btn-primary"
+    (click)="openNewTaskModal()">
+
+    <i class="bi bi-plus-lg me-1"></i>
+    New Task
+
+  </button>
+
+</div>
+
 <div class="card">
 
   <div class="card-header d-flex justify-content-between align-items-center">
@@ -218,9 +231,20 @@
 @if (showAddMemberModal) {
 
   <app-add-member-modal
-      [teamId]="team.teamId"
-      (saved)="onMemberAdded()"
-      (close)="closeAddMemberModal()">
+    [teamId]="team.teamId"
+    (saved)="onMemberAdded()"
+    (close)="closeAddMemberModal()">
   </app-add-member-modal>
+
+}
+
+@if (showTaskModal) {
+
+  <app-task-modal
+    [task]="selectedTask"
+    [fixedTeamId]="team.teamId"
+    (saved)="onTaskSaved()"
+    (close)="closeTaskModal()">
+  </app-task-modal>
 
 }

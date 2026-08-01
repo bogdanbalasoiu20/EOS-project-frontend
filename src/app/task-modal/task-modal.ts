@@ -1,10 +1,11 @@
-import { Component, inject, Input, Output, EventEmitter } from '@angular/core';
+import { Component, inject, Input, Output, EventEmitter, signal } from '@angular/core';
 import { TaskService } from '../../services/tasksservice';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
 import { StatusService } from '../../services/statusservice';
 import { UserService } from '../../services/userservice';
+import { TeamService } from '../../services/teamservice';
 
 @Component({
   selector: 'app-task-modal',
@@ -16,34 +17,79 @@ import { UserService } from '../../services/userservice';
 export class TaskModal implements OnInit {
   private taskService = inject(TaskService);
   private statusService = inject(StatusService);
-  private userService = inject(UserService);
+  private teamService = inject(TeamService);
 
   @Input() task: any = {
     taskName: '',
     dueDate: '',
     statusTypeId: 'P',   
-    userId: null 
+    userId: null,
+    teamId: null
   };
+  @Input() fixedTeamId: number | null = null; // daca taskmodal este deschis din TeamDetails, atunci echipa este fixa si nu poate fi schimbata
 
   @Output() close = new EventEmitter<void>();
   @Output() saved = new EventEmitter<void>();
 
-  statuses: any[] = [];
-  users: any[] = [];
+  statuses = signal<any[]>([]);
+  teams= signal<any[]>([]);
+  users= signal<any[]>([]);
 
   ngOnInit(): void {
-    this.statusService.getStatuses().subscribe(res => {
 
-      this.statuses = res.filter(status =>
+    this.loadStatuses();
+
+    // TaskModal deschis din TeamDetails
+    if (this.fixedTeamId != null) {
+      this.task.teamId = this.fixedTeamId;
+      this.loadMembers(this.fixedTeamId);
+
+    } else {
+      // TaskModal deschis din MyTasks
+      this.loadTeams();
+
+      // dupa ce aleg o echipa, trebuie sa incarcam membrii acesteia
+      if (this.task.teamId != null) {
+        this.loadMembers(this.task.teamId);
+      }
+
+    }
+  }
+
+  loadStatuses() {
+    this.statusService.getStatuses().subscribe(res => {
+      const filteredStatuses = res.filter(status =>
         ['Pending', 'In Progress', 'Completed', 'Cancelled']
           .includes(status.statusName)
       );
 
-      this.userService.getUsers().subscribe(users => {
-        this.users = users;
-      });
+      this.statuses.set(filteredStatuses);
 
     });
+  }
+
+  loadTeams() {
+    this.teamService.getTeams().subscribe(res => {
+      this.teams.set(res);
+    });
+
+  }
+
+  loadMembers(teamId: number) {
+    this.teamService.getMembers(teamId).subscribe(res => {
+      this.users.set(res);
+    });
+
+  }
+
+  // Daca se schimba echipa, trebuie sa resetam userId si sa incarcam membrii noii echipe
+  onTeamChange() {
+    this.task.userId = null;
+    this.users.set([]);
+
+    if (this.task.teamId != null) {
+      this.loadMembers(this.task.teamId);
+    }
   }
 
 

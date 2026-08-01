@@ -62,7 +62,8 @@ export class Mytasks implements OnInit {
       taskName: '',
       dueDate: '',
       statusTypeId: 'P',
-      userId: null
+      userId: null,
+      teamId: null
     };
 
     this.showModal = true;
