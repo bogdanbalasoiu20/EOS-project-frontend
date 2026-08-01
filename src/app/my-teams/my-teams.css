@@ -1,0 +1,160 @@
+/* ==========================================================================
+   PAGE HEADER WITH ICON
+   ========================================================================== */
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+
+.title-icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: #e0e7ff; /* Indigo deschis */
+  color: #4f46e5;            /* Indigo vibrant */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.08);
+  flex-shrink: 0;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   TEAMS CARDS & LISTS
+   ========================================================================== */
+
+/* Cardurile principale (Teams I Lead & Teams I'm a Member Of) */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+/* Antetul Cardului (Titlul secțiunii) */
+.card-header {
+  background-color: #ffffff !important;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.card-header strong {
+  color: #1e293b;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.card-body {
+  padding: 1.25rem 1.5rem;
+}
+
+/* --- STILIZARE LIST-GROUP (Echipele) --- */
+.list-group {
+  border-radius: 10px;
+  gap: 0.5rem; /* Spațiu între elementele din listă */
+}
+
+.list-group-item {
+  border: 1px solid #f1f5f9 !important;
+  border-radius: 10px !important;
+  padding: 1rem 1.25rem;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efect Hover pe rândul de echipă */
+.list-group-item:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Denumirea echipei */
+.list-group-item h6 {
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 0.975rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Descrierea sau Leader-ul */
+.list-group-item small {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   BUTOANE (Manage / See Team)
+   ========================================================================== */
+
+.btn-outline-primary {
+  color: #4f46e5;
+  border-color: #c7d2fe;
+  background-color: #e0e7ff;
+  font-weight: 600;
+  font-size: 0.825rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-outline-primary:hover {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+/* Butonul "New Team" */
+.btn-primary {
+  background-color: #4f46e5;
+  border: none;
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #4338ca;
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   EMPTY STATE (Când nu ești în nicio echipă)
+   ========================================================================== */
+.empty-teams-box, .text-muted.mb-0 {
+  color: #94a3b8 !important;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+}

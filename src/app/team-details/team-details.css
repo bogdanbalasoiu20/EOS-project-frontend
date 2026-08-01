@@ -1,0 +1,301 @@
+/* ==========================================================================
+   TEAM DETAILS - PAGE HEADER
+   ========================================================================== */
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+
+.title-icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: #e0e7ff;
+  color: #4f46e5;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.08);
+  flex-shrink: 0;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   STAT CARDS (Leader, Members, Tasks)
+   ========================================================================== */
+.stat-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+}
+
+.stat-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.icon-leader {
+  background-color: #e0e7ff;
+  color: #4f46e5;
+}
+
+.icon-members {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.icon-tasks {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.stat-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* ==========================================================================
+   MAIN MEMBERS TABLE
+   ========================================================================== */
+.main-table-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.main-table-card .card-header {
+  background-color: #ffffff !important;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.main-table-card .card-header strong {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.table thead th {
+  background-color: #1e293b;
+  color: #f1f5f9;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.725rem;
+  letter-spacing: 0.08em;
+  padding: 1.1rem 1.5rem;
+  border: none;
+}
+
+.table tbody td {
+  padding: 1rem 1.5rem;
+  vertical-align: middle;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Avatar Utilizator */
+.member-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #f1f5f9;
+  color: #64748b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.member-name {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Badge-uri Roluri (Leader vs Member) */
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.role-admin {
+  background-color: #e0e7ff;
+  color: #4338ca;
+  border: 1px solid #c7d2fe;
+}
+
+.role-user {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+/* Buton Expand Tasks */
+.toggle-tasks-btn {
+  border-color: #e2e8f0;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.toggle-tasks-btn:hover, .toggle-tasks-btn.active {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+/* Buton Remove Member */
+.btn-outline-danger {
+  color: #e11d48;
+  border-color: #fecdd3;
+  background-color: #fff1f2;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn-outline-danger:hover {
+  background-color: #e11d48;
+  color: #ffffff;
+  border-color: #e11d48;
+}
+
+/* ==========================================================================
+   EXPANDED TASKS SUB-PANEL (Nested view)
+   ========================================================================== */
+.expanded-row td {
+  background-color: #f8fafc !important;
+  padding: 0 !important;
+}
+
+.expanded-tasks-container {
+  padding: 1.25rem 1.5rem;
+  background-color: #f8fafc;
+  border-top: 1px inset #f1f5f9;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.expanded-tasks-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+}
+
+.expanded-tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.task-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.task-name {
+  color: #0f172a;
+  font-size: 0.9rem;
+}
+
+.task-date {
+  font-size: 0.775rem;
+  color: #64748b;
+  margin-top: 0.15rem;
+}
+
+.no-tasks-sub-state {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 500;
+  padding: 0.5rem 0;
+}
+
+/* ==========================================================================
+   STATUS BADGES (Re-utilizate)
+   ========================================================================== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px; 
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-completed { background-color: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+.status-completed::before { background-color: #10b981; }
+
+.status-in-progress { background-color: #e0e7ff; color: #4338ca; border: 1px solid #c7d2fe; }
+.status-in-progress::before { background-color: #6366f1; }
+
+.status-pending { background-color: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+.status-pending::before { background-color: #f59e0b; }
+
+.status-cancelled { background-color: #f3f4f6; color: #6b7280; border: 1px solid #e5e7eb; }
+.status-cancelled::before { background-color: #9ca3af; }

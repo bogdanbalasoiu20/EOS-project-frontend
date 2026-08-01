@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TeamService } from '../../services/teamservice';
 import { AddMemberModal } from '../add-member-modal/add-member-modal';
 import { TaskModal } from '../task-modal/task-modal';
+import { TaskService } from '../../services/tasksservice';
 
 @Component({
   selector: 'app-team-details',
@@ -15,12 +16,15 @@ import { TaskModal } from '../task-modal/task-modal';
 export class TeamDetails implements OnInit {
   private route = inject(ActivatedRoute);
   private teamService = inject(TeamService);
+  private taskService = inject(TaskService);
 
   team: any = {};
   members = signal<any[]>([]);
   showAddMemberModal = false;
   showTaskModal = false;
   selectedTask: any = {};
+  expandedMemberId = signal<number | null>(null);  // pastrez id-ul membrului al carui taskuri sunt afisate
+  memberTasks = signal<Record<number, any[]>>({}); // pastrez taskurile pentru fiecare membru, indexate dupa userId; un obiect in care cheia este userId si valoarea este un array de taskuri
 
   ngOnInit(): void {
     const teamId = Number(this.route.snapshot.paramMap.get('teamId'));
@@ -85,6 +89,39 @@ export class TeamDetails implements OnInit {
 
   onTaskSaved() {
     this.showTaskModal = false;
+  }
+
+  toggleMemberTasks(userId: number) {
+
+    // verific daca taskurile pentru acest membru sunt deja afisate; daca da, le ascundem
+    if (this.expandedMemberId() === userId) {
+      this.expandedMemberId.set(null);
+      return;
+    }
+
+    //daca nu sunt afisate, le afisez si fac request pentru taskurile membrului respectiv
+    this.expandedMemberId.set(userId);
+
+    // verific daca am deja taskurile pentru acest membru; daca da, nu mai fac request
+    if (this.memberTasks()[userId]) {
+      return;
+    }
+
+    this.taskService.getMemberTasks(this.team.teamId, userId).subscribe(tasks => {
+        this.memberTasks.update(current => ({
+          ...current, //copiez taskurile deja existente pentru alti membri
+          [userId]: tasks // adaug taskurile pentru membrul curent, indexate dupa userId
+        }));
+
+      });
+  }
+
+
+  canManageTeam(): boolean {
+    const loggedUsername = localStorage.getItem('username');
+    const role = localStorage.getItem('role');
+
+    return role === 'ADMIN' || loggedUsername === this.team.teamLeaderUsername;
   }
 
 }

@@ -57,4 +57,8 @@ export class TaskService {
   deleteTask(taskId: number) {
     return this.http.delete(`${this.api}/${taskId}`);
   }
+
+  getMemberTasks(teamId: number, userId: number) {
+    return this.http.get<any[]>(`${this.api}/${teamId}/members/${userId}/tasks`);
+  }
 }
