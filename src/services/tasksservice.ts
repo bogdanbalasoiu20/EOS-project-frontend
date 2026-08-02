@@ -61,4 +61,20 @@ export class TaskService {
   getMemberTasks(teamId: number, userId: number) {
     return this.http.get<any[]>(`${this.api}/${teamId}/members/${userId}/tasks`);
   }
+
+  getTaskById(taskId: number) {
+    return this.http.get<any>(`${this.api}/${taskId}`);
+  }
+
+  updateTaskStatus(taskId: number, statusTypeId: string) {
+    return this.http.patch<any>(`${this.api}/${taskId}/status`,
+      {
+        statusTypeId: statusTypeId
+      }
+    );
+  }
+
+  getUnassignedTeamTasks(teamId: number) {
+    return this.http.get<any[]>(`${this.api}/team/${teamId}/unassigned`);
+  }
 }

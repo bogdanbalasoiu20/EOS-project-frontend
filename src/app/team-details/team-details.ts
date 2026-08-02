@@ -5,11 +5,12 @@ import { TeamService } from '../../services/teamservice';
 import { AddMemberModal } from '../add-member-modal/add-member-modal';
 import { TaskModal } from '../task-modal/task-modal';
 import { TaskService } from '../../services/tasksservice';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-team-details',
   standalone: true,
-  imports: [CommonModule, AddMemberModal, TaskModal],
+  imports: [CommonModule, AddMemberModal, TaskModal, RouterLink],
   templateUrl: './team-details.html',
   styleUrl: './team-details.css',
 })
@@ -25,6 +26,9 @@ export class TeamDetails implements OnInit {
   selectedTask: any = {};
   expandedMemberId = signal<number | null>(null);  // pastrez id-ul membrului al carui taskuri sunt afisate
   memberTasks = signal<Record<number, any[]>>({}); // pastrez taskurile pentru fiecare membru, indexate dupa userId; un obiect in care cheia este userId si valoarea este un array de taskuri
+  unassignedTasks = signal<any[]>([]); // pastrez taskurile neatribuite pentru echipa
+  unassignedExpanded = signal(false); // pastrez starea de afisare a taskurilor neatribuite pentru echipa
+  unassignedTasksLoaded = signal(false);// pastrez starea de incarcare a taskurilor neatribuite pentru echipa
 
   ngOnInit(): void {
     const teamId = Number(this.route.snapshot.paramMap.get('teamId'));
@@ -107,6 +111,7 @@ export class TeamDetails implements OnInit {
       return;
     }
 
+    // requestul se face la apasarea butonului de afisare a taskurilor pentru un membru, si nu la incarcarea paginii, pentru a reduce numarul de requesturi si a imbunatati performanta
     this.taskService.getMemberTasks(this.team.teamId, userId).subscribe(tasks => {
         this.memberTasks.update(current => ({
           ...current, //copiez taskurile deja existente pentru alti membri
@@ -122,6 +127,30 @@ export class TeamDetails implements OnInit {
     const role = localStorage.getItem('role');
 
     return role === 'ADMIN' || loggedUsername === this.team.teamLeaderUsername;
+  }
+
+
+  // functia care gestioneaza afisarea taskurilor neatribuite pentru echipa
+  toggleUnassignedTasks() {
+
+    // verific daca taskurile neatribuite sunt deja afisate; daca da, le ascundem
+    if (this.unassignedExpanded()) {
+      this.unassignedExpanded.set(false);
+      return;
+    }
+
+    //daca nu sunt afisate, le afisez si fac request pentru taskurile neatribuite
+    this.unassignedExpanded.set(true);
+
+    // verific daca am deja taskurile neatribuite; daca da, nu mai fac request
+    if (this.unassignedTasksLoaded()) {
+      return;
+    }
+
+    this.taskService.getUnassignedTeamTasks(this.team.teamId).subscribe(tasks => {
+        this.unassignedTasks.set(tasks); // setez taskurile neatribuite in signal
+        this.unassignedTasksLoaded.set(true); // setez flag-ul pentru a indica ca taskurile neatribuite au fost deja incarcate
+      });
   }
 
 }

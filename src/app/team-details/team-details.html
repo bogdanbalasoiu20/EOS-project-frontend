@@ -135,11 +135,21 @@
                         @for (task of memberTasks()[member.userId]; track task.taskId) {
                           <div class="task-item-row">
                             <div>
-                              <strong class="task-name">{{ task.taskName }}</strong>
-                              <div class="task-date">
-                                <i class="bi bi-clock me-1"></i>Due: {{ task.dueDate | date:'dd.MM.yyyy HH:mm' }}
-                              </div>
-                            </div>
+
+                                  <a
+                                    [routerLink]="['/tasks', task.taskId]"
+                                    class="task-name text-decoration-none">
+
+                                    {{ task.taskName }}
+
+                                  </a>
+
+                                  <div class="task-date">
+                                    <i class="bi bi-clock me-1"></i>
+                                    Due: {{ task.dueDate | date:'dd.MM.yyyy HH:mm' }}
+                                  </div>
+
+                                </div>
 
                             <span class="status-badge"
                                   [ngClass]="{
@@ -163,6 +173,141 @@
               </tr>
             }
           }
+
+          <tr>
+
+            <td>
+              <div class="d-flex align-items-center gap-2">
+
+                <div class="member-avatar">
+                  <i class="bi bi-person-x"></i>
+                </div>
+
+                <span class="member-name text-muted">
+                  Unassigned
+                </span>
+
+              </div>
+            </td>
+
+            <td>
+              <span class="role-badge role-user">
+                No Assignee
+              </span>
+            </td>
+
+            <td>
+
+              <button
+                class="btn btn-outline-secondary btn-sm toggle-tasks-btn"
+                [class.active]="unassignedExpanded()"
+                (click)="toggleUnassignedTasks()">
+
+                <i
+                  class="bi"
+                  [ngClass]="
+                    unassignedExpanded()
+                      ? 'bi-chevron-up'
+                      : 'bi-chevron-down'
+                  ">
+                </i>
+
+                Tasks
+
+              </button>
+
+            </td>
+
+            @if (canManageTeam()) {
+              <td></td>
+            }
+
+          </tr>
+
+          @if (unassignedExpanded()) {
+
+            <tr class="expanded-row">
+
+              <td [attr.colspan]="canManageTeam() ? 4 : 3">
+
+                <div class="expanded-tasks-container">
+
+                  <h6 class="expanded-tasks-title">
+                    Unassigned Tasks
+                  </h6>
+
+                  @if (unassignedTasks().length > 0) {
+
+                    <div class="expanded-tasks-list">
+
+                      @for (task of unassignedTasks(); track task.taskId) {
+
+                        <div class="task-item-row">
+
+                          <div>
+
+                            <a
+                              [routerLink]="['/tasks', task.taskId]"
+                              class="task-name text-decoration-none">
+
+                              {{ task.taskName }}
+
+                            </a>
+
+                            <div class="task-date">
+
+                              <i class="bi bi-clock me-1"></i>
+
+                              Due:
+                              {{ task.dueDate | date:'dd.MM.yyyy HH:mm' }}
+
+                            </div>
+
+                          </div>
+
+                          <span
+                            class="status-badge"
+                            [ngClass]="{
+                              'status-completed':
+                                task.statusName === 'Completed',
+
+                              'status-in-progress':
+                                task.statusName === 'In Progress',
+
+                              'status-pending':
+                                task.statusName === 'Pending',
+
+                              'status-cancelled':
+                                task.statusName === 'Cancelled'
+                            }">
+
+                            {{ task.statusName }}
+
+                          </span>
+
+                        </div>
+
+                      }
+
+                    </div>
+
+                  } @else {
+
+                    <div class="no-tasks-sub-state">
+                      <i class="bi bi-check2-circle me-1"></i>
+                      No unassigned tasks.
+                    </div>
+
+                  }
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          }
+
         </tbody>
       </table>
     } @else {

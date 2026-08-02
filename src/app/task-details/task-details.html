@@ -1,0 +1,166 @@
+@if (task()) {
+
+  <div class="page-header">
+
+    <div class="d-flex align-items-center gap-3">
+
+      <div class="title-icon-box">
+        <i class="bi bi-check2-square"></i>
+      </div>
+
+      <div>
+
+        <h2 class="page-title mb-0">
+          {{ task().taskName }}
+        </h2>
+
+        <p class="page-subtitle mb-0">
+          Task Details
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="row mb-4">
+
+    <div class="col-md-4">
+
+      <div class="card h-100">
+
+        <div class="card-body text-center">
+
+          <i class="bi bi-person fs-2 text-primary"></i>
+
+          <h6 class="mt-3 mb-1">
+            Assigned To
+          </h6>
+
+          <p class="text-muted mb-0">
+
+            @if (task().username) {
+              {{ task().username }}
+            } @else {
+              Unassigned
+            }
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="col-md-4">
+
+      <div class="card h-100">
+
+        <div class="card-body text-center">
+
+          <i class="bi bi-calendar-event fs-2 text-warning"></i>
+
+          <h6 class="mt-3 mb-1">
+            Due Date
+          </h6>
+
+          <p class="text-muted mb-0">
+            {{ task().dueDate | date:'dd.MM.yyyy HH:mm' }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="col-md-4">
+
+      <div class="card h-100">
+
+        <div class="card-body text-center">
+
+          <i class="bi bi-info-circle fs-2 text-success"></i>
+
+          <h6 class="mt-3 mb-1">
+            Status
+          </h6>
+
+          <span
+            class="badge"
+            [ngClass]="{
+              'bg-success': task().statusName === 'Completed',
+              'bg-warning text-dark': task().statusName === 'Pending',
+              'bg-primary': task().statusName === 'In Progress',
+              'bg-secondary': task().statusName === 'Cancelled'
+            }">
+
+            {{ task().statusName }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="card-header">
+      <strong>Task Information</strong>
+    </div>
+
+    <div class="card-body">
+
+      <div class="row">
+
+        <div class="col-md-6">
+
+          <p>
+            <strong>Created By:</strong>
+            {{ task().createdBy }}
+          </p>
+
+          <p>
+            <strong>Assigned To:</strong>
+
+            @if (task().username) {
+              {{ task().username }}
+            } @else {
+              <span class="text-muted">Unassigned</span>
+            }
+
+          </p>
+
+        </div>
+
+        <div class="col-md-6">
+
+          <p>
+            <strong>Status:</strong>
+            {{ task().statusName }}
+          </p>
+
+          <p>
+            <strong>Due Date:</strong>
+            {{ task().dueDate | date:'dd.MM.yyyy HH:mm' }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}

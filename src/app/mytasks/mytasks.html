@@ -203,6 +203,7 @@
       <tr>
         <th>Due Date</th>
         <th>Subject</th>
+        <th>Team</th>
         <th>Assigned To</th>
         <th>Status</th>
         <th>Created By</th>
@@ -217,6 +218,15 @@
         <tr>
           <td>{{ task.dueDate | date:'dd.MM.yyyy HH:mm' }}</td>
           <td>{{ task.taskName }}</td>
+
+          <td>
+            @if (task.teamName) {
+              {{ task.teamName }}
+            } @else {
+              <span class="text-muted">-</span>
+            }
+          </td>
+
           <td>
             @if (task.username) {
               {{ task.username }}
@@ -226,15 +236,45 @@
           </td>
 
           <td>
-            <span class="status-badge"
-                  [ngClass]="{
-                    'status-completed': task.statusName === 'Completed',
-                    'status-in-progress': task.statusName === 'In Progress',
-                    'status-pending': task.statusName === 'Pending',
-                    'status-cancelled': task.statusName === 'Cancelled'
-                  }">
-              {{ task.statusName }}
-            </span>
+
+            @if (isAdmin()) {
+
+              <span
+                class="status-badge"
+                [ngClass]="{
+                  'status-completed': task.statusName === 'Completed',
+                  'status-in-progress': task.statusName === 'In Progress',
+                  'status-pending': task.statusName === 'Pending',
+                  'status-cancelled': task.statusName === 'Cancelled'
+                }">
+
+                {{ task.statusName }}
+
+              </span>
+
+            } @else {
+
+              <select
+                class="form-select form-select-sm status-select"
+                [ngClass]="{
+                  'status-completed': task.statusName === 'Completed',
+                  'status-in-progress': task.statusName === 'In Progress',
+                  'status-pending': task.statusName === 'Pending',
+                  'status-cancelled': task.statusName === 'Cancelled'
+                }"
+                [ngModel]="task.statusTypeId"
+                (ngModelChange)="updateStatus(task, $event)">
+
+                @for (status of statuses; track status.statusTypeId) {
+                  <option [value]="status.statusTypeId">
+                    {{ status.statusName }}
+                  </option>
+                }
+
+              </select>
+
+            }
+
           </td>
 
           <td>{{ task.createdBy }}</td>

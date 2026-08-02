@@ -145,4 +145,10 @@ export class Mytasks implements OnInit {
     this.searchCriteria.start = '';
     this.searchCriteria.end = '';
   }
+
+  updateStatus(task: any, statusTypeId: string) {
+    this.taskService.updateTaskStatus(task.taskId, statusTypeId).subscribe(updatedTask => {
+        this.loadTasks();
+      });
+  }
 }

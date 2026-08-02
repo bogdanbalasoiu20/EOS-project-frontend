@@ -9,6 +9,7 @@ import { Admin } from './admin/admin';
 import { AdminGuard } from '../services/admin.guard';
 import { MyTeams } from './my-teams/my-teams';
 import { TeamDetails } from './team-details/team-details';
+import { TaskDetails } from './task-details/task-details';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path: 'search', component: Search, canActivate: [LoggedInGuard] },
   {path: 'myteams',component: MyTeams,canActivate: [LoggedInGuard]},
   {path: 'myteams/:teamId',component: TeamDetails,canActivate: [LoggedInGuard]},
+  {path: 'tasks/:taskId',component: TaskDetails,canActivate: [LoggedInGuard]},
 
   {path: 'admin', component: Admin, canActivate:[AdminGuard]}, //pagina de admin poate fi accesata doar de userii cu rolul ADMIN
 
