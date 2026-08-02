@@ -17,7 +17,9 @@ export class LoginComponent {
   private router = inject(Router);
 
   isLogin = true;
-  showPassword = false;
+  showLoginPassword = false;
+  showRegisterPassword = false;
+  showConfirmPassword = false;
 
   loginData = {
     email: '',
@@ -28,7 +30,8 @@ export class LoginComponent {
     username: '',
     email: '',
     password: '',
-    birthDate: ''
+    birthDate: '',
+    confirmPassword: ''
   };
 
   message = '';
@@ -51,6 +54,11 @@ export class LoginComponent {
   }
 
   register() {
+    if (this.registerData.password !== this.registerData.confirmPassword) {
+      this.message = 'Passwords do not match.';
+      return;
+    }
+
     this.authService.register(this.registerData).subscribe({
       next: () => {
         this.loginData.email = this.registerData.email;
@@ -64,7 +72,4 @@ export class LoginComponent {
     });
   }
 
-  togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword;
-  }
 }
