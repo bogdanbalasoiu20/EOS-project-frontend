@@ -29,7 +29,8 @@ export class Mytasks implements OnInit {
   pageSize=5;
   totalPages=0; // pentru a putea afisa numarul total de pagini in interfata
   totalElements=0; //numarul de taskuri intoarse cu eventuale filtre aplicate, pentru a putea afisa numarul total de taskuri in interfata
-
+  sortField = 'dueDate';
+  sortDirection: 'asc' | 'desc' = 'desc';
 
   searchCriteria = {
     keyword: '',
@@ -55,7 +56,7 @@ export class Mytasks implements OnInit {
   }
 
   loadTasks(filters = this.searchCriteria) {
-    this.taskService.getTasks(filters, this.currentPage, this.pageSize).subscribe(res => {
+    this.taskService.getTasks(filters, this.currentPage, this.pageSize, this.sortField, this.sortDirection).subscribe(res => {
       this.tasks.set(res.content);
       this.totalElements = res.totalElements;
       this.totalPages = res.totalPages;
@@ -165,5 +166,20 @@ export class Mytasks implements OnInit {
   changePage(page: number) {
     this.currentPage = page;
     this.loadTasks();
+  }
+
+
+  sortBy(field: string) {
+
+    // daca se face click pe acelasi field, schimb directia de sortare, altfel setez field-ul si directia de sortare la ascendent
+    if (this.sortField === field) {
+      this.sortDirection =this.sortDirection === 'asc'?'desc': 'asc';
+    } else {
+      this.sortField = field;
+      this.sortDirection = 'asc';
+    }
+
+    this.currentPage = 0;
+    this.searchTasks(); // in caz ca sunt aplicate filtre, sortarea se face pe rezultatele filtrate
   }
 }

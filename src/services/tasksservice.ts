@@ -9,7 +9,7 @@ export class TaskService {
   private http = inject(HttpClient);
   private api = 'http://localhost:8080/tasks';
 
-  getTasks(filters: any, page: number, size: number) {
+  getTasks(filters: any, page: number, size: number, sortField: string, sortDirection: string) {
     let params = new HttpParams();
 
     if (filters.keyword) {
@@ -46,6 +46,7 @@ export class TaskService {
 
     params=params.set('page',page)
     params=params.set('size',size)
+    params=params.set('sort',`${sortField},${sortDirection}`);
 
     return this.http.get<PageResponse<any>>(this.api, { params });
   }

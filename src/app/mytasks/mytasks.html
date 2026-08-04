@@ -201,10 +201,40 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Due Date</th>
-        <th>Subject</th>
+        <th class="sortable" (click)="sortBy('dueDate')">
+          Due Date
+        
+          @if (sortField === 'dueDate') {
+            <i
+              class="bi ms-1"
+              [ngClass]="sortDirection === 'asc'? 'bi-arrow-up': 'bi-arrow-down'">
+            </i>
+
+          }
+        </th>
+        <th class="sortable" (click)="sortBy('taskName')">
+          Subject
+
+          @if (sortField === 'taskName') {
+            <i
+              class="bi ms-1"
+              [ngClass]="sortDirection === 'asc'? 'bi-arrow-up': 'bi-arrow-down'">
+            </i>
+
+          }
+        </th>
         <th>Team</th>
-        <th>Assigned To</th>
+        <th class="sortable" (click)="sortBy('user')">
+          Assigned To
+        
+          @if (sortField === 'user') {
+            <i
+              class="bi ms-1"
+              [ngClass]="sortDirection === 'asc'? 'bi-arrow-up': 'bi-arrow-down'">
+            </i>
+
+          }
+        </th>
         <th>Status</th>
         <th>Created By</th>
         @if (isAdmin()) {
