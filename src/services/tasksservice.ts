@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { PageResponse } from '../app/models/PageResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ export class TaskService {
   private http = inject(HttpClient);
   private api = 'http://localhost:8080/tasks';
 
-  getTasks(filters: any) {
+  getTasks(filters: any, page: number, size: number) {
     let params = new HttpParams();
 
     if (filters.keyword) {
@@ -43,7 +44,10 @@ export class TaskService {
       params = params.set('end', filters.end);
     }
 
-    return this.http.get<any[]>(this.api, { params });
+    params=params.set('page',page)
+    params=params.set('size',size)
+
+    return this.http.get<PageResponse<any>>(this.api, { params });
   }
 
   createTask(task: any) {

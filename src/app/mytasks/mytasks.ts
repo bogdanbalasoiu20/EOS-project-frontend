@@ -25,6 +25,11 @@ export class Mytasks implements OnInit {
   users: any[] = [];
   showFilters = false;
   loggedUsername = localStorage.getItem('username');
+  currentPage=0;
+  pageSize=5;
+  totalPages=0; // pentru a putea afisa numarul total de pagini in interfata
+  totalElements=0; //numarul de taskuri intoarse cu eventuale filtre aplicate, pentru a putea afisa numarul total de taskuri in interfata
+
 
   searchCriteria = {
     keyword: '',
@@ -50,8 +55,11 @@ export class Mytasks implements OnInit {
   }
 
   loadTasks(filters = this.searchCriteria) {
-    this.taskService.getTasks(filters).subscribe(res => {
-      this.tasks.set(res);
+    this.taskService.getTasks(filters, this.currentPage, this.pageSize).subscribe(res => {
+      this.tasks.set(res.content);
+      this.totalElements = res.totalElements;
+      this.totalPages = res.totalPages;
+      this.currentPage = res.number;
     });
   }
 
@@ -113,6 +121,7 @@ export class Mytasks implements OnInit {
       filters.period = '';
     }
 
+    this.currentPage = 0; // resetez pagina curenta la 0 pentru a incepe cautarea de la prima pagina
     this.loadTasks(filters);
 
   }
@@ -128,6 +137,7 @@ export class Mytasks implements OnInit {
     end: ''
   };
 
+    this.currentPage =0;
     this.loadTasks();
   }
 
@@ -150,5 +160,10 @@ export class Mytasks implements OnInit {
     this.taskService.updateTaskStatus(task.taskId, statusTypeId).subscribe(updatedTask => {
         this.loadTasks();
       });
+  }
+
+  changePage(page: number) {
+    this.currentPage = page;
+    this.loadTasks();
   }
 }
