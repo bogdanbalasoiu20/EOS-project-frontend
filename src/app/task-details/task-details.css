@@ -1,0 +1,383 @@
+/* ==========================================================================
+   PAGE HEADER WITH ICON
+   ========================================================================== */
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+
+.title-icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: #e0e7ff; /* Indigo deschis */
+  color: #4f46e5;            /* Indigo vibrant */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.08);
+  flex-shrink: 0;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   STAT CARDS (Top 3 Cards: Assigned To, Due Date, Status)
+   ========================================================================== */
+.row.mb-4 .card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.row.mb-4 .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+}
+
+.row.mb-4 .card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Stil pentru iconițele din cardurile de sus */
+.row.mb-4 .card-body i.fs-2 {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem !important;
+  margin-bottom: 0.25rem;
+}
+
+/* Icon - Assigned To (Albastru) */
+.row.mb-4 .card-body i.text-primary {
+  background-color: #eff6ff;
+  color: #2563eb !important;
+}
+
+/* Icon - Due Date (Portocaliu) */
+.row.mb-4 .card-body i.text-warning {
+  background-color: #fffbeb;
+  color: #d97706 !important;
+}
+
+/* Icon - Status (Verde) */
+.row.mb-4 .card-body i.text-success {
+  background-color: #ecfdf5;
+  color: #059669 !important;
+}
+
+.row.mb-4 h6 {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.row.mb-4 p.text-muted {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0f172a !important;
+}
+
+/* Suprascriere Badge-uri Bootstrap din HTML */
+.row.mb-4 .badge {
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.row.mb-4 .badge::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.row.mb-4 .badge.bg-success {
+  background-color: #ecfdf5 !important;
+  color: #047857 !important;
+  border: 1px solid #a7f3d0;
+}
+.row.mb-4 .badge.bg-success::before { background-color: #10b981; }
+
+.row.mb-4 .badge.bg-primary {
+  background-color: #e0e7ff !important;
+  color: #4338ca !important;
+  border: 1px solid #c7d2fe;
+}
+.row.mb-4 .badge.bg-primary::before { background-color: #6366f1; }
+
+.row.mb-4 .badge.bg-warning {
+  background-color: #fffbeb !important;
+  color: #b45309 !important;
+  border: 1px solid #fde68a;
+}
+.row.mb-4 .badge.bg-warning::before { background-color: #f59e0b; }
+
+.row.mb-4 .badge.bg-secondary {
+  background-color: #f3f4f6 !important;
+  color: #6b7280 !important;
+  border: 1px solid #e5e7eb;
+}
+.row.mb-4 .badge.bg-secondary::before { background-color: #9ca3af; }
+
+/* ==========================================================================
+   TASK INFORMATION CARD
+   ========================================================================== */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: #ffffff !important;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.card-header strong {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Detaliile din Task Information */
+.card-body p {
+  font-size: 0.925rem;
+  color: #334155;
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.card-body p strong {
+  color: #64748b;
+  font-weight: 600;
+  min-width: 110px;
+}
+
+/* ==========================================================================
+   COMMENTS SECTION
+   ========================================================================== */
+.comment-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.comment-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.comment-header strong {
+  color: #0f172a;
+  font-size: 0.925rem;
+  font-weight: 600;
+}
+
+.comment-header small {
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.comment-content {
+  color: #334155;
+  font-size: 0.925rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Toggle Show/Hide Replies Button */
+.reply-toggle {
+  color: #4f46e5 !important;
+  font-weight: 600;
+  font-size: 0.825rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.reply-toggle:hover {
+  color: #4338ca !important;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   THREAD RĂSPUNSURI (Replies Section)
+   ========================================================================== */
+.reply-list {
+  margin-top: 1rem;
+  margin-left: 1.75rem;
+  padding-left: 1.25rem;
+  border-left: 2px solid #e0e7ff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.reply-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.85rem 1.1rem;
+  transition: all 0.15s ease;
+}
+
+.reply-card:hover {
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.reply-card .comment-header strong {
+  font-size: 0.875rem;
+}
+
+.reply-card .comment-content {
+  font-size: 0.875rem;
+}
+
+/* Deleted Comment State */
+.deleted-comment {
+  color: #94a3b8;
+  font-style: italic;
+  font-size: 0.875rem;
+  padding: 0.4rem 0.75rem;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.deleted-comment::before {
+  content: '🗑️';
+  font-style: normal;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   ADD COMMENT TEXTAREA & BUTTON
+   ========================================================================== */
+.card hr {
+  border-color: #f1f5f9;
+  margin: 1.75rem 0 1.25rem 0;
+  opacity: 1;
+}
+
+.card textarea.form-control {
+  resize: vertical;
+  min-height: 90px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.925rem;
+  color: #0f172a;
+  background-color: #ffffff;
+  transition: all 0.15s ease-in-out;
+}
+
+.card textarea.form-control:focus {
+  outline: none;
+  border-color: #818cf8;
+  box-shadow: 0 0 0 3.5px rgba(79, 70, 229, 0.1);
+}
+
+.card textarea.form-control::placeholder {
+  color: #94a3b8;
+}
+
+.card .btn-primary {
+  background-color: #4f46e5;
+  border: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.2);
+  transition: all 0.2s ease;
+}
+
+.card .btn-primary:hover:not(:disabled) {
+  background-color: #4338ca;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  transform: translateY(-1px);
+}
+
+.card .btn-primary:disabled {
+  background-color: #cbd5e1;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reply-list {
+    margin-left: 0.75rem;
+    padding-left: 0.75rem;
+    border-left-width: 2px;
+  }
+}

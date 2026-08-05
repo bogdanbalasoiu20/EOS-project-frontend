@@ -9,7 +9,6 @@
       </div>
 
       <div>
-
         <h2 class="page-title mb-0">
           {{ task().taskName }}
         </h2>
@@ -17,7 +16,6 @@
         <p class="page-subtitle mb-0">
           Task Details
         </p>
-
       </div>
 
     </div>
@@ -163,4 +161,312 @@
 
   </div>
 
+
+  <div class="card mt-4">
+
+  <div class="card-header">
+    <strong>Comments</strong>
+  </div>
+
+  <div class="card-body">
+
+    @if (comments().length > 0) {
+
+      @for (comment of comments(); track comment.commentId) {
+
+        <div class="comment-card">
+
+          <div class="comment-header">
+
+            <div>
+
+              <strong>{{ comment.username }}</strong>
+
+              <small class="text-muted ms-2">
+                {{ comment.creationDate | date:'dd.MM.yyyy HH:mm' }}
+              </small>
+
+            </div>
+
+            <div class="comment-actions">
+
+              @if (!comment.deleted) {
+
+                <button
+                  class="btn btn-link btn-sm comment-action-btn"
+                  (click)="replyTo(comment)">
+                  Reply
+                </button>
+
+              }
+
+
+              @if (!comment.deleted && comment.username === loggedUsername) {
+
+                <button
+                  class="btn btn-link btn-sm comment-action-btn"
+                  (click)="editComment(comment)">
+                  Edit
+                </button>
+
+                <button
+                  class="btn btn-link btn-sm text-danger comment-action-btn"
+                  (click)="deleteComment(comment)">
+                  Delete
+                </button>
+
+              }
+
+            </div>
+
+          </div>
+
+          @if (comment.deleted) {
+
+            <div class="deleted-comment">
+              This comment was deleted.
+            </div>
+
+          } @else {
+
+            @if (editingComment?.commentId === comment.commentId) {
+
+              <textarea
+                class="form-control"
+                rows="3"
+                [(ngModel)]="editedText">
+              </textarea>
+
+              <div class="d-flex justify-content-end gap-2 mt-2">
+
+                <button
+                  class="btn btn-outline-secondary btn-sm"
+                  (click)="cancelEdit()">
+                  Cancel
+                </button>
+
+                <button
+                  class="btn btn-primary btn-sm"
+                  [disabled]="!editedText.trim()"
+                  (click)="saveEdit()">
+                  Save
+                </button>
+
+              </div>
+
+            } @else {
+
+              <div class="comment-content">
+                {{ comment.content }}
+              </div>
+
+            }
+
+            @if (replyingTo?.commentId === comment.commentId) {
+
+              <div class="reply-box mt-3">
+
+                <textarea
+                  class="form-control"
+                  rows="3"
+                  [(ngModel)]="replyText"
+                  placeholder="Write your reply...">
+                </textarea>
+
+                <div class="d-flex justify-content-end gap-2 mt-2">
+
+                  <button
+                    class="btn btn-outline-secondary btn-sm"
+                    (click)="cancelReply()">
+                    Cancel
+                  </button>
+
+                  <button
+                    class="btn btn-primary btn-sm"
+                    [disabled]="!replyText.trim()"
+                    (click)="submitReply()">
+                    Reply
+                  </button>
+
+                </div>
+
+              </div>
+
+            }
+
+          }
+
+          @if (comment.replies.length > 0) {
+
+            <button
+              class="btn btn-link btn-sm p-0 mt-3 reply-toggle"
+              (click)="toggleReplies(comment.commentId)">
+
+              <i
+                class="bi me-1"
+                [ngClass]="
+                  areRepliesExpanded(comment.commentId)
+                    ? 'bi-chevron-down'
+                    : 'bi-chevron-right'
+                ">
+              </i>
+
+              @if (areRepliesExpanded(comment.commentId)) {
+
+                Hide replies
+
+              } @else {
+
+                Show replies ({{ comment.replies.length }})
+
+              }
+
+            </button>
+
+            @if (areRepliesExpanded(comment.commentId)) {
+
+              <div class="reply-list">
+
+                @for (reply of comment.replies; track reply.commentId) {
+
+                  <div class="reply-card">
+
+                    <div class="comment-header">
+
+                      <div>
+
+                        <strong>{{ reply.username }}</strong>
+
+                        <small class="text-muted ms-2">
+                          {{ reply.creationDate | date:'dd.MM.yyyy HH:mm' }}
+                        </small>
+
+                      </div>
+
+                      <div class="comment-actions">
+
+                          @if (!reply.deleted && reply.username === loggedUsername) {
+
+                            <button
+                              class="btn btn-link btn-sm comment-action-btn"
+                              (click)="editComment(reply)">
+                              Edit
+                            </button>
+
+                            <button
+                              class="btn btn-link btn-sm text-danger comment-action-btn"
+                              (click)="deleteComment(reply)">
+                              Delete
+                            </button>
+
+                          }
+
+                        </div>
+
+                    </div>
+
+                    @if (reply.deleted) {
+
+                      <div class="deleted-comment">
+                        This comment was deleted.
+                      </div>
+
+                    } @else {
+
+                      @if (editingComment?.commentId === reply.commentId) {
+
+                        <textarea
+                          class="form-control"
+                          rows="3"
+                          [(ngModel)]="editedText">
+                        </textarea>
+
+                        <div class="d-flex justify-content-end gap-2 mt-2">
+
+                          <button
+                            class="btn btn-outline-secondary btn-sm"
+                            (click)="cancelEdit()">
+                            Cancel
+                          </button>
+
+                          <button
+                            class="btn btn-primary btn-sm"
+                            [disabled]="!editedText.trim()"
+                            (click)="saveEdit()">
+                            Save
+                          </button>
+
+                        </div>
+
+                      } @else {
+
+                        <div class="comment-content">
+                          {{ reply.content }}
+                        </div>
+
+                      }
+
+                    }
+
+                  </div>
+
+                }
+
+              </div>
+
+            }
+
+          }
+
+        </div>
+
+      }
+
+    } @else {
+
+      <div class="text-center text-muted py-4">
+
+        <i class="bi bi-chat-square-text fs-3 d-block mb-2"></i>
+
+        No comments yet.
+
+      </div>
+
+    }
+
+    <hr>
+
+    <div class="mt-4">
+
+      <label class="form-label">
+        Add Comment
+      </label>
+
+      <textarea
+        rows="3"
+        class="form-control"
+        [(ngModel)]="newComment"
+        placeholder="Write a comment...">
+      </textarea>
+
+      <div class="d-flex justify-content-end mt-3">
+
+        <button
+          class="btn btn-primary"
+          [disabled]="!newComment.trim()"
+          (click)="createComment()">
+
+          <i class="bi bi-send me-1"></i>
+
+          Post Comment
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 }
